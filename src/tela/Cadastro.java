@@ -330,6 +330,8 @@ public class Cadastro extends javax.swing.JFrame {
             }
         }else if(!usuarioValido)
             JOptionPane.showMessageDialog(null, "O usuário passado já existe");
+        else if(!usuarioValido && usuario.equals(""))
+            JOptionPane.showMessageDialog(null, "O usuário não foi preenchido");
         else if(!verificaSenha)
             JOptionPane.showMessageDialog(null, "As senhas não correspondem");
         else if(nome.equals("") || usuario.equals("") || email.equals("")){

@@ -269,7 +269,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_psSenhaActionPerformed
 
     private void jbCriaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCriaContaActionPerformed
-        // TODO add your handling code here:
+        Cadastro cadastro = new Cadastro();
+        cadastro.setVisible(true);
     }//GEN-LAST:event_jbCriaContaActionPerformed
 
     private void jbLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLoginMouseEntered

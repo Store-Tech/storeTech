@@ -13,7 +13,7 @@ public class Consultas {
     Connection con;
     
     public boolean validaLogin(String usuario, String senha) throws SQLException{
-        boolean valido=false;
+        boolean autentica=false;
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
         String SQL = "SELECT usuario, password FROM users WHERE usuario = ? AND password = ?";
@@ -22,13 +22,13 @@ public class Consultas {
         pst.setString(2, senha);
         ResultSet rs = pst.executeQuery();
         if(rs.next())
-            valido = false;
+            autentica = true;
         else
-            valido = true;
+            autentica = false;
         rs.close();
         pst.close();
         conexao.fecharConexao();
-        return valido;
+        return autentica;
     }
     
     public boolean usuarioDisponivel(String usuario) throws SQLException{

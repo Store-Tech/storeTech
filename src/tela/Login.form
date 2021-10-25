@@ -119,12 +119,10 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jbLogin" min="-2" pref="137" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel1" min="-2" pref="360" max="-2" attributes="0"/>
-                              <Component id="tfUsuario" max="32767" attributes="0"/>
-                              <Component id="jLabel2" alignment="0" min="-2" pref="360" max="-2" attributes="0"/>
-                              <Component id="psSenha" alignment="0" min="-2" pref="360" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabel1" alignment="0" min="-2" pref="360" max="-2" attributes="0"/>
+                          <Component id="tfUsuario" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" pref="360" max="-2" attributes="0"/>
+                          <Component id="psSenha" alignment="0" min="-2" pref="360" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="17" max="32767" attributes="0"/>
