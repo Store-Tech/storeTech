@@ -321,7 +321,7 @@ public class Cadastro extends javax.swing.JFrame {
         String email = jtEmail.getText();
         String senha = jpSenha.getText();
         Consultas consulta = new Consultas();
-        if(usuarioValido && verificaSenha){
+        if(usuarioValido && verificaSenha && !nome.equals("") && !email.equals("")){
             try{
                 consulta.adicionaUsuario(nome, usuario, email, senha);
                 JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso");
@@ -332,6 +332,9 @@ public class Cadastro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "O usuário passado já existe");
         else if(!verificaSenha)
             JOptionPane.showMessageDialog(null, "As senhas não correspondem");
+        else if(nome.equals("") || usuario.equals("") || email.equals("")){
+            JOptionPane.showMessageDialog(null, "Um ou mais campos estão vazios");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNomeFocusLost
