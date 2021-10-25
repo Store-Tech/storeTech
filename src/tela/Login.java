@@ -1,15 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package storeTech;
+package tela;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import storeTech.Consultas;
 
 /**
  *
@@ -20,8 +20,9 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public Login() {
+    public Login() throws IOException {
         initComponents();
+        
     }
 
     /**
@@ -40,9 +41,11 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tfUsuario = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jbLogin = new javax.swing.JButton();
         psSenha = new javax.swing.JPasswordField();
-        jButton3 = new javax.swing.JButton();
+        jbCriaConta = new javax.swing.JButton();
+        jbTrocaSenha = new javax.swing.JButton();
+        jbFechaTela = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
 
@@ -51,7 +54,7 @@ public class Login extends javax.swing.JFrame {
         setUndecorated(true);
         setSize(new java.awt.Dimension(400, 410));
 
-        jPanel1.setBackground(new java.awt.Color(0, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 51));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -67,20 +70,20 @@ public class Login extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("E-mail");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Senha");
 
         tfUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -89,24 +92,24 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 255, 204));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Login");
-        jButton1.setBorderPainted(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setFocusPainted(false);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbLogin.setBackground(new java.awt.Color(0, 102, 51));
+        jbLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jbLogin.setForeground(new java.awt.Color(255, 255, 255));
+        jbLogin.setText("Login");
+        jbLogin.setBorderPainted(false);
+        jbLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbLogin.setFocusPainted(false);
+        jbLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton1MouseEntered(evt);
+                jbLoginMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton1MouseExited(evt);
+                jbLoginMouseExited(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbLoginActionPerformed(evt);
             }
         });
 
@@ -116,24 +119,38 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(153, 153, 153));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Criar uma conta");
-        jButton3.setBorderPainted(false);
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.setFocusPainted(false);
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbCriaConta.setBackground(new java.awt.Color(51, 51, 51));
+        jbCriaConta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jbCriaConta.setForeground(new java.awt.Color(255, 255, 255));
+        jbCriaConta.setText("Criar uma conta");
+        jbCriaConta.setBorderPainted(false);
+        jbCriaConta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbCriaConta.setFocusPainted(false);
+        jbCriaConta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton3MouseEntered(evt);
+                jbCriaContaMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton3MouseExited(evt);
+                jbCriaContaMouseExited(evt);
             }
         });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbCriaConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbCriaContaActionPerformed(evt);
+            }
+        });
+
+        jbTrocaSenha.setBackground(new java.awt.Color(51, 51, 51));
+        jbTrocaSenha.setForeground(new java.awt.Color(255, 255, 255));
+        jbTrocaSenha.setText("Esqueceu a senha?");
+        jbTrocaSenha.setBorder(null);
+        jbTrocaSenha.setBorderPainted(false);
+        jbTrocaSenha.setContentAreaFilled(false);
+        jbTrocaSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbTrocaSenha.setFocusPainted(false);
+        jbTrocaSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbTrocaSenhaActionPerformed(evt);
             }
         });
 
@@ -144,15 +161,17 @@ public class Login extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addGap(86, 86, 86)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(psSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jbTrocaSenha)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jbCriaConta)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfUsuario)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(psSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -166,12 +185,35 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(psSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbTrocaSenha)
+                .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton1))
-                .addContainerGap(57, Short.MAX_VALUE))
+                    .addComponent(jbCriaConta)
+                    .addComponent(jbLogin))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
+
+        jbFechaTela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botao-x (2).png"))); // NOI18N
+        jbFechaTela.setBorder(null);
+        jbFechaTela.setBorderPainted(false);
+        jbFechaTela.setContentAreaFilled(false);
+        jbFechaTela.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbFechaTela.setFocusPainted(false);
+        jbFechaTela.setFocusable(false);
+        jbFechaTela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jbFechaTelaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jbFechaTelaMouseExited(evt);
+            }
+        });
+        jbFechaTela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbFechaTelaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -179,10 +221,15 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jbFechaTela, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jbFechaTela, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -196,7 +243,9 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfUsuarioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    
+    private void jbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLoginActionPerformed
         String usuario = tfUsuario.getText();
         String senha = psSenha.getText();
         Consultas consulta = new Consultas();
@@ -213,35 +262,52 @@ public class Login extends javax.swing.JFrame {
         }catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbLoginActionPerformed
 
     private void psSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_psSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_psSenhaActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jbCriaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCriaContaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jbCriaContaActionPerformed
 
-    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
-        jButton1.setBackground(new Color(235,235,235));
-        jButton1.setForeground(new Color(58,65,84));
-    }//GEN-LAST:event_jButton1MouseEntered
+    private void jbLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLoginMouseEntered
+        jbLogin.setBackground(new Color(235,235,235));
+        jbLogin.setForeground(new Color(58,65,84));
+    }//GEN-LAST:event_jbLoginMouseEntered
 
-    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
-        jButton1.setBackground(new Color(0,255,204));
-        jButton1.setForeground(Color.WHITE);
-    }//GEN-LAST:event_jButton1MouseExited
+    private void jbLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLoginMouseExited
+        jbLogin.setBackground(new Color(0,102,51));
+        jbLogin.setForeground(Color.WHITE);
+    }//GEN-LAST:event_jbLoginMouseExited
 
-    private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
-        jButton3.setBackground(new Color(235,235,235));
-        jButton3.setForeground(new Color(58,65,84));
-    }//GEN-LAST:event_jButton3MouseEntered
+    private void jbCriaContaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCriaContaMouseEntered
+        jbCriaConta.setBackground(new Color(235,235,235));
+        jbCriaConta.setForeground(new Color(58,65,84));
+    }//GEN-LAST:event_jbCriaContaMouseEntered
 
-    private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
-        jButton3.setBackground(new Color(153,153,153));
-        jButton3.setForeground(Color.WHITE);
-    }//GEN-LAST:event_jButton3MouseExited
+    private void jbCriaContaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCriaContaMouseExited
+        jbCriaConta.setBackground(new Color(51,51,51));
+        jbCriaConta.setForeground(Color.WHITE);
+    }//GEN-LAST:event_jbCriaContaMouseExited
+
+    private void jbTrocaSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTrocaSenhaActionPerformed
+        TrocaSenha ts = new TrocaSenha();
+        ts.setVisible(true);
+    }//GEN-LAST:event_jbTrocaSenhaActionPerformed
+
+    private void jbFechaTelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFechaTelaActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbFechaTelaActionPerformed
+
+    private void jbFechaTelaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbFechaTelaMouseEntered
+
+    }//GEN-LAST:event_jbFechaTelaMouseEntered
+
+    private void jbFechaTelaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbFechaTelaMouseExited
+
+    }//GEN-LAST:event_jbFechaTelaMouseExited
 
     /**
      * @param args the command line arguments
@@ -273,20 +339,26 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                try {
+                    new Login().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jbCriaConta;
+    private javax.swing.JButton jbFechaTela;
+    private javax.swing.JButton jbLogin;
+    private javax.swing.JButton jbTrocaSenha;
     private javax.swing.JPasswordField psSenha;
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables

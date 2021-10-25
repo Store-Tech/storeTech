@@ -1,4 +1,4 @@
-package prova;
+package storeTech;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-        Login login = new Login();
-        login.setVisible(true);
+        trocaSenha ts = new trocaSenha();
+        ts.setVisible(true);
     }
 }
