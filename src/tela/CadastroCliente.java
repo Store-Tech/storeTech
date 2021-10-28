@@ -5,6 +5,8 @@
  */
 package tela;
 
+import DAO.ClienteDAO;
+import Model.Cliente;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -16,11 +18,11 @@ import storeTech.Consultas;
  *
  * @author Matheus
  */
-public class Cadastro extends javax.swing.JFrame {
+public class CadastroCliente extends javax.swing.JInternalFrame{
 
     private boolean usuarioValido;
     private boolean verificaSenha;
-    public Cadastro() {
+    public CadastroCliente() {
         initComponents();
     }
 
@@ -50,17 +52,18 @@ public class Cadastro extends javax.swing.JFrame {
         jpSenha = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         jtNome = new javax.swing.JTextField();
-        jbFecha = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jtCpf = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setUndecorated(true);
+        setBackground(new java.awt.Color(255, 153, 153));
+        setForeground(java.awt.Color.gray);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 51));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Cadastro");
+        jLabel1.setText("Cadastro Cliente");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,7 +77,7 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -161,6 +164,21 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("CPF");
+
+        jtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtCpfFocusLost(evt);
+            }
+        });
+        jtCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtCpfActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -168,24 +186,30 @@ public class Cadastro extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtEmail)
+                    .addComponent(jpSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                    .addComponent(jpConfirmaSenha)
+                    .addComponent(jtNome)
                     .addComponent(jButton2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtEmail)
-                    .addComponent(jtUsuario)
-                    .addComponent(jpSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
-                    .addComponent(jpConfirmaSenha)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlAvisoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jlComparaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2)
-                    .addComponent(jtNome))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jlAvisoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jtCpf))))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -194,13 +218,20 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlAvisoUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlAvisoUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel7)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -222,31 +253,16 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        jbFecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botao-x (2).png"))); // NOI18N
-        jbFecha.setBorder(null);
-        jbFecha.setBorderPainted(false);
-        jbFecha.setContentAreaFilled(false);
-        jbFecha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jbFecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbFechaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jbFecha))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jbFecha)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -254,28 +270,23 @@ public class Cadastro extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtEmailActionPerformed
 
-    private void jbFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFechaActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jbFechaActionPerformed
-
     private void jtUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtUsuarioFocusLost
         String usuario;
         boolean disponivel=false;
         usuario = jtUsuario.getText();
-        Consultas consulta = new Consultas();
+        ClienteDAO cliente = new ClienteDAO();
         try {
             if(!usuario.equals(""))
-                disponivel = consulta.usuarioDisponivel(usuario);
+                disponivel = cliente.usuarioDisponivel(usuario);
                 System.out.println(disponivel);
         } catch (SQLException ex) {
-            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(disponivel){
             jlAvisoUsuario.setForeground(new Color(0,255,0));
@@ -316,25 +327,27 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nome = jtNome.getText();
-        String usuario = jtUsuario.getText();
-        String email = jtEmail.getText();
-        String senha = jpSenha.getText();
-        Consultas consulta = new Consultas();
-        if(usuarioValido && verificaSenha && !nome.equals("") && !email.equals("")){
+        Cliente c = new Cliente();
+        c.setNome(jtNome.getText());
+        c.setUsuario(jtUsuario.getText());
+        c.setCpf(jtCpf.getText());
+        c.setEmail(jtNome.getText());
+        c.setSenha(jpSenha.getText());
+        ClienteDAO cliente = new ClienteDAO();
+        if(usuarioValido && verificaSenha && !c.getNome().equals("") && !c.getEmail().equals("")){
             try{
-                consulta.adicionaUsuario(nome, usuario, email, senha);
+                cliente.adicionaUsuario(c);
                 JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso");
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar usuario. Erro: " + e);
             }
         }else if(!usuarioValido)
             JOptionPane.showMessageDialog(null, "O usuário passado já existe");
-        else if(!usuarioValido && usuario.equals(""))
+        else if(!usuarioValido && c.getUsuario().equals(""))
             JOptionPane.showMessageDialog(null, "O usuário não foi preenchido");
         else if(!verificaSenha)
             JOptionPane.showMessageDialog(null, "As senhas não correspondem");
-        else if(nome.equals("") || usuario.equals("") || email.equals("")){
+        else if(c.getNome().equals("") || c.getUsuario().equals("") || c.getEmail().equals("")){
             JOptionPane.showMessageDialog(null, "Um ou mais campos estão vazios");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -346,6 +359,14 @@ public class Cadastro extends javax.swing.JFrame {
     private void jtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtNomeActionPerformed
+
+    private void jtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtCpfFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtCpfFocusLost
+
+    private void jtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtCpfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -364,21 +385,23 @@ public class Cadastro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cadastro().setVisible(true);
+                new CadastroCliente().setVisible(true);
             }
         });
     }
@@ -392,13 +415,14 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JButton jbFecha;
     private javax.swing.JLabel jlAvisoUsuario;
     private javax.swing.JLabel jlComparaSenha;
     private javax.swing.JPasswordField jpConfirmaSenha;
     private javax.swing.JPasswordField jpSenha;
+    private javax.swing.JTextField jtCpf;
     private javax.swing.JTextField jtEmail;
     private javax.swing.JTextField jtNome;
     private javax.swing.JTextField jtUsuario;

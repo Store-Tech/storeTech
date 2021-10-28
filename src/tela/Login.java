@@ -1,5 +1,6 @@
 package tela;
 
+import DAO.ClienteDAO;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.IOException;
@@ -248,10 +249,10 @@ public class Login extends javax.swing.JFrame {
     private void jbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLoginActionPerformed
         String usuario = tfUsuario.getText();
         String senha = psSenha.getText();
-        Consultas consulta = new Consultas();
+        ClienteDAO cliente = new ClienteDAO();
         try {
-            if(consulta.validaLogin(usuario, senha)){
-                Principal p = new Principal();
+            if(cliente.validaLogin(usuario, senha)){
+                PrincipalUsuario p = new PrincipalUsuario();
                 p.setVisible(true);
                 this.dispose();
             }else{
@@ -269,7 +270,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_psSenhaActionPerformed
 
     private void jbCriaContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCriaContaActionPerformed
-        Cadastro cadastro = new Cadastro();
+        CadastroCliente cadastro = new CadastroCliente();
         cadastro.setVisible(true);
     }//GEN-LAST:event_jbCriaContaActionPerformed
 
