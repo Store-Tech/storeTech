@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-        trocaSenha ts = new trocaSenha();
-        ts.setVisible(true);
+
     }
 }
