@@ -26,7 +26,7 @@ public class ClienteDAO {
     public void adicionaUsuario(Cliente c) throws SQLException {
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
-        String SQL = "insert into users (NOME, USUARIO, EMAIL, CPF, PASSWORD) values(?,?,?,?,?);";
+        String SQL = "insert into tb_cliente (NOME, USUARIO, EMAIL, CPF, SENHA) values(?,?,?,?,?);";
         try {
             pst = con.prepareStatement(SQL);
             pst.setString(1, c.getNome());
@@ -47,7 +47,7 @@ public class ClienteDAO {
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
         ResultSet rs = null;
-        String SQL = "SELECT usuario, password FROM users WHERE USUARIO = ? AND PASSWORD = ?";
+        String SQL = "SELECT usuario, password FROM tb_cliente WHERE USUARIO = ? AND SENHA = ?";
         try {
             pst = con.prepareStatement(SQL);
             pst.setString(1, usuario);
@@ -72,7 +72,7 @@ public class ClienteDAO {
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
         ResultSet rs = null;
-        String SQL = "SELECT USUARIO from users WHERE USUARIO=?";
+        String SQL = "SELECT USUARIO from tb_cliente WHERE USUARIO=?";
         try {
             pst = con.prepareStatement(SQL);
             pst.setString(1, usuario);
@@ -94,7 +94,7 @@ public class ClienteDAO {
     public int retornaCodProd() throws SQLException {
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
-        String SQL = "SELECT MAX(idC) FROM cliente";
+        String SQL = "SELECT MAX(idC) FROM tb_cliente";
         int codigo = 0;
         ResultSet rs = null;
         try {
@@ -117,7 +117,7 @@ public class ClienteDAO {
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
         ResultSet rs = null;
-        String SQL = "SELECT CODUSUARIO, NOME, USUARIO, CPF, EMAIL from users";
+        String SQL = "SELECT CODUSUARIO, NOME, USUARIO, CPF, EMAIL from tb_cliente";
         try {
             pst = con.prepareStatement(SQL);
             rs = pst.executeQuery();

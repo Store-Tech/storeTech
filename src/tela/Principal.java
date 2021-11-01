@@ -5,6 +5,7 @@
  */
 package tela;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -35,12 +36,12 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbCadastrarCliente = new javax.swing.JButton();
+        jbCadastrarProduto = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jbConsultaCliente = new javax.swing.JButton();
+        jbConsultaProduto = new javax.swing.JButton();
+        jbConsultaVenda = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
@@ -59,31 +60,47 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cadastro");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("-Cadastrar Cliente");
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbCadastrarCliente.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jbCadastrarCliente.setForeground(new java.awt.Color(255, 255, 255));
+        jbCadastrarCliente.setText("-Cadastrar Cliente");
+        jbCadastrarCliente.setBorder(null);
+        jbCadastrarCliente.setBorderPainted(false);
+        jbCadastrarCliente.setContentAreaFilled(false);
+        jbCadastrarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbCadastrarCliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbCadastrarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jbCadastrarClienteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jbCadastrarClienteMouseExited(evt);
+            }
+        });
+        jbCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbCadastrarClienteActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("-Cadastrar Produto");
-        jButton2.setBorder(null);
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbCadastrarProduto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jbCadastrarProduto.setForeground(new java.awt.Color(255, 255, 255));
+        jbCadastrarProduto.setText("-Cadastrar Produto");
+        jbCadastrarProduto.setBorder(null);
+        jbCadastrarProduto.setBorderPainted(false);
+        jbCadastrarProduto.setContentAreaFilled(false);
+        jbCadastrarProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbCadastrarProduto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbCadastrarProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jbCadastrarProdutoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jbCadastrarProdutoMouseExited(evt);
+            }
+        });
+        jbCadastrarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbCadastrarProdutoActionPerformed(evt);
             }
         });
 
@@ -91,37 +108,61 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Consulta");
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("-Consulta Cliente");
-        jButton3.setBorder(null);
-        jButton3.setBorderPainted(false);
-        jButton3.setContentAreaFilled(false);
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbConsultaCliente.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jbConsultaCliente.setForeground(new java.awt.Color(255, 255, 255));
+        jbConsultaCliente.setText("-Consulta Cliente");
+        jbConsultaCliente.setBorder(null);
+        jbConsultaCliente.setBorderPainted(false);
+        jbConsultaCliente.setContentAreaFilled(false);
+        jbConsultaCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbConsultaCliente.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbConsultaCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jbConsultaClienteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jbConsultaClienteMouseExited(evt);
+            }
+        });
+        jbConsultaCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbConsultaClienteActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("-Consulta Produto");
-        jButton4.setBorder(null);
-        jButton4.setBorderPainted(false);
-        jButton4.setContentAreaFilled(false);
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbConsultaProduto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jbConsultaProduto.setForeground(new java.awt.Color(255, 255, 255));
+        jbConsultaProduto.setText("-Consulta Produto");
+        jbConsultaProduto.setBorder(null);
+        jbConsultaProduto.setBorderPainted(false);
+        jbConsultaProduto.setContentAreaFilled(false);
+        jbConsultaProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbConsultaProduto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbConsultaProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jbConsultaProdutoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jbConsultaProdutoMouseExited(evt);
+            }
+        });
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("-Consulta Venda");
-        jButton5.setBorder(null);
-        jButton5.setBorderPainted(false);
-        jButton5.setContentAreaFilled(false);
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbConsultaVenda.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jbConsultaVenda.setForeground(new java.awt.Color(255, 255, 255));
+        jbConsultaVenda.setText("-Consulta Venda");
+        jbConsultaVenda.setBorder(null);
+        jbConsultaVenda.setBorderPainted(false);
+        jbConsultaVenda.setContentAreaFilled(false);
+        jbConsultaVenda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbConsultaVenda.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbConsultaVenda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jbConsultaVendaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jbConsultaVendaMouseExited(evt);
+            }
+        });
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/web-house (1).png"))); // NOI18N
         jButton6.setBorder(null);
@@ -158,23 +199,22 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jButton6))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jbCadastrarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jbConsultaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbConsultaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel2)
                                     .addGap(83, 83, 83))
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jbConsultaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,17 +232,17 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jbCadastrarCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(jbCadastrarProduto)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(jbConsultaCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(jbConsultaProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addComponent(jbConsultaVenda)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
                 .addComponent(jButton8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -260,9 +300,9 @@ public class Principal extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jDesktopPane1)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,19 +321,19 @@ public class Principal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarClienteActionPerformed
         CadastroCliente cadastro = new CadastroCliente();
         jDesktopPane1.add(cadastro);
         cadastro.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbCadastrarClienteActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarProdutoActionPerformed
         CadastroProduto cp = new CadastroProduto();
         jDesktopPane1.add(cp); 
         cp.setVisible(true);       
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbCadastrarProdutoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jbConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultaClienteActionPerformed
         ConsultaCliente consultCliente = null;
         try {
             consultCliente = new ConsultaCliente();
@@ -302,7 +342,48 @@ public class Principal extends javax.swing.JFrame {
         }
         jDesktopPane1.add(consultCliente);
         consultCliente.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jbConsultaClienteActionPerformed
+
+    private void jbCadastrarClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarClienteMouseEntered
+        jbCadastrarCliente.setFont(new Font("Tahoma", Font.BOLD, 12));
+        
+    }//GEN-LAST:event_jbCadastrarClienteMouseEntered
+
+    private void jbCadastrarClienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarClienteMouseExited
+        jbCadastrarCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    }//GEN-LAST:event_jbCadastrarClienteMouseExited
+
+    private void jbCadastrarProdutoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarProdutoMouseEntered
+        jbCadastrarProduto.setFont(new Font("Tahoma", Font.BOLD, 12));
+    }//GEN-LAST:event_jbCadastrarProdutoMouseEntered
+
+    private void jbCadastrarProdutoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarProdutoMouseExited
+        jbCadastrarProduto.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    }//GEN-LAST:event_jbCadastrarProdutoMouseExited
+
+    private void jbConsultaClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultaClienteMouseEntered
+        jbConsultaCliente.setFont(new Font("Tahoma", Font.BOLD, 12));
+    }//GEN-LAST:event_jbConsultaClienteMouseEntered
+
+    private void jbConsultaClienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultaClienteMouseExited
+        jbConsultaCliente.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    }//GEN-LAST:event_jbConsultaClienteMouseExited
+
+    private void jbConsultaProdutoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultaProdutoMouseEntered
+        jbConsultaProduto.setFont(new Font("Tahoma", Font.BOLD, 12));
+    }//GEN-LAST:event_jbConsultaProdutoMouseEntered
+
+    private void jbConsultaProdutoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultaProdutoMouseExited
+        jbConsultaProduto.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    }//GEN-LAST:event_jbConsultaProdutoMouseExited
+
+    private void jbConsultaVendaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultaVendaMouseEntered
+        jbConsultaVenda.setFont(new Font("Tahoma", Font.BOLD, 12));
+    }//GEN-LAST:event_jbConsultaVendaMouseEntered
+
+    private void jbConsultaVendaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbConsultaVendaMouseExited
+        jbConsultaVenda.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    }//GEN-LAST:event_jbConsultaVendaMouseExited
 
     /**
      * @param args the command line arguments
@@ -341,11 +422,6 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -356,5 +432,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jbCadastrarCliente;
+    private javax.swing.JButton jbCadastrarProduto;
+    private javax.swing.JButton jbConsultaCliente;
+    private javax.swing.JButton jbConsultaProduto;
+    private javax.swing.JButton jbConsultaVenda;
     // End of variables declaration//GEN-END:variables
 }
