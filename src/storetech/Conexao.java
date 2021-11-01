@@ -13,7 +13,7 @@ public class Conexao {
         
         try{
             String serverName = "localhost";
-            String database = "store_tech";
+            String database = "storetech";
             String url = "jdbc:mysql://" + serverName + "/" + database + "?useTimezone=true&serverTimezone=UTC";
             String user = "root";
             String passwd = "1234";
