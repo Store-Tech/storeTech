@@ -117,15 +117,15 @@ public class ClienteDAO {
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
         ResultSet rs = null;
-        String SQL = "SELECT CODUSUARIO, NOME, USUARIO, CPF, EMAIL from tb_cliente";
+        String SQL = "SELECT CLIENTEID, NOME, USUARIO, CPF, EMAIL from tb_cliente";
         try {
             pst = con.prepareStatement(SQL);
             rs = pst.executeQuery();
             while (rs.next()) {
                 Cliente cliente = new Cliente();
-                cliente.setCodigo(rs.getInt("CODUSUARIO"));
-                cliente.setNome(rs.getString("USUARIO"));
-                cliente.setUsuario(rs.getString("NOME"));
+                cliente.setCodigo(rs.getInt("CLIENTEID"));
+                cliente.setNome(rs.getString("NOME"));
+                cliente.setUsuario(rs.getString("USUARIO"));
                 cliente.setCpf(rs.getString("CPF"));
                 cliente.setEmail(rs.getString("EMAIL"));
                 listaCliente.add(cliente);
@@ -136,5 +136,105 @@ public class ClienteDAO {
         rs.close();
         conexao.fecharConexao();
         return listaCliente;
+    }
+    
+    public boolean cpfExistente(String cpf) throws SQLException {
+        boolean disponivel = false;
+        Conexao conexao = new Conexao();
+        con = conexao.getConexao();
+        ResultSet rs = null;
+        String SQL = "SELECT CPF from tb_cliente WHERE CPF=?";
+        try {
+            pst = con.prepareStatement(SQL);
+            pst.setString(1, cpf);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                disponivel = false;
+            } else {
+                disponivel = true;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao consultar CPF no banco. Erro: " + e);
+        }
+        rs.close();
+        pst.close();
+        conexao.fecharConexao();
+        return disponivel;
+    }
+
+    public void updateCliente(Cliente c) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.getConexao();
+        String update = "UPDATE storetech.TB_CLIENTE SET NOME = ?, CPF = ?, EMAIL = ? WHERE CLIENTEID = ?";
+        try {
+            pst = con.prepareStatement(update);
+            pst.setString(1, c.getNome());
+            pst.setString(2, c.getCpf());
+            pst.setString(3, c.getEmail());
+            pst.setInt(4, c.getCodigo());
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar cliente" + e);
+        }
+        conexao.fecharConexao();
+    }
+
+    public ArrayList pesquisaUsuario(Cliente c) throws SQLException {
+        ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
+        Conexao conexao = new Conexao();
+        con = conexao.getConexao();
+        ResultSet rs = null;
+        String SQL = "SELECT CLIENTEID, NOME, USUARIO, EMAIL, CPF from tb_cliente where Nome like ? and CPF like ? and Email like ? and CLIENTEID like ?";
+        try {
+            pst = con.prepareStatement(SQL);
+            pst.setString(1, "%" + c.getNome() + "%");
+            pst.setString(2, "%" + c.getCpf() + "%");
+            pst.setString(3, "%" + c.getEmail() + "%");
+            Integer codigo = c.getCodigo();
+            if(codigo != 0)
+                pst.setInt(4, c.getCodigo());
+            else{
+                pst.setString(4, "%%");
+                System.out.println("Entrei no else");
+            }
+            rs = pst.executeQuery();
+            if (rs!=null) {
+                while (rs.next()) {
+                    Cliente cliente = new Cliente();
+                    cliente.setCodigo(rs.getInt("CLIENTEID"));
+                    cliente.setNome(rs.getString("NOME"));
+                    cliente.setUsuario(rs.getString("USUARIO"));
+                    cliente.setCpf(rs.getString("CPF"));
+                    cliente.setEmail(rs.getString("EMAIL"));
+                    System.out.println("Adicionei");
+                    listaCliente.add(cliente);
+                }
+            } else {
+                rs.close();
+                conexao.fecharConexao();
+                listaCliente.add(c);
+                return listaCliente;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao resgatar a lista de clientes. Erro: " + e);
+        }
+        rs.close();
+        conexao.fecharConexao();
+        return listaCliente;
+    }
+
+    public void deleteCliente(Cliente c) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.getConexao();
+        String delete = "DELETE FROM storetech.TB_CLIENTE WHERE CLIENTEID = ?";
+        try {
+            pst = con.prepareStatement(delete);
+            pst.setInt(1, c.getCodigo());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Cliente deletado com sucesso");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao deletar cliente" + e);
+        }
+        conexao.fecharConexao();
     }
 }

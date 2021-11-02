@@ -9,6 +9,9 @@ import DAO.ClienteDAO;
 import Model.Cliente;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -59,10 +62,12 @@ public class ConsultaCliente extends javax.swing.JInternalFrame {
         jtCpf = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jtEmail = new javax.swing.JTextField();
+        jbSalvar = new javax.swing.JButton();
 
         jLabel3.setText("jLabel3");
 
         setBorder(null);
+        setClosable(true);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 51));
 
@@ -130,9 +135,19 @@ public class ConsultaCliente extends javax.swing.JInternalFrame {
 
         jbExcluir.setText("Excluir");
         jbExcluir.setEnabled(false);
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
 
         jbEditar.setText("Editar");
         jbEditar.setEnabled(false);
+        jbEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEditarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -146,6 +161,14 @@ public class ConsultaCliente extends javax.swing.JInternalFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("E-mail");
 
+        jbSalvar.setText("Salvar");
+        jbSalvar.setEnabled(false);
+        jbSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalvarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -154,33 +177,32 @@ public class ConsultaCliente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(24, 24, 24)
-                                .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jbPesquisar)
-                        .addGap(42, 42, 42)
-                        .addComponent(jbExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47))))
+                        .addComponent(jLabel4)
+                        .addGap(24, 24, 24)
+                        .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jbPesquisar)
+                            .addGap(27, 27, 27)
+                            .addComponent(jbExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(36, 36, 36)
+                            .addComponent(jbEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +223,8 @@ public class ConsultaCliente extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbPesquisar)
                     .addComponent(jbExcluir)
-                    .addComponent(jbEditar))
+                    .addComponent(jbEditar)
+                    .addComponent(jbSalvar))
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -231,7 +254,23 @@ public class ConsultaCliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
-        // TODO add your handling code here:
+        Cliente c = new Cliente();
+        String teste = jtId.getText();
+        if (!teste.equals("")) {
+            c.setCodigo(Integer.parseInt(jtId.getText()));
+        } else {
+            c.setCodigo(0);
+        }
+        c.setNome(jtNome.getText());
+        c.setCpf(jtCpf.getText());
+        c.setEmail(jtEmail.getText());
+        limpaTabela();
+        try {
+            listaCliente = cliente.pesquisaUsuario(c);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        montaTable(listaCliente);
     }//GEN-LAST:event_jbPesquisarActionPerformed
 
     private void jtDadosClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtDadosClienteMouseClicked
@@ -241,10 +280,46 @@ public class ConsultaCliente extends javax.swing.JInternalFrame {
         jtNome.setText(c.getNome());
         jtCpf.setText(c.getCpf());
         jtEmail.setText(c.getEmail());
-        //jbPesquisar.setEnabled(false);
-        //jbExcluir.setEnabled(true);
-        //jbEditar.setEnabled(true);
+        jbPesquisar.setEnabled(false);
+        jbExcluir.setEnabled(true);
+        jbEditar.setEnabled(true);
+        jtNome.setEnabled(false);
+        jtCpf.setEnabled(false);
+        jtEmail.setEnabled(false);
+        jtId.setEnabled(false);
     }//GEN-LAST:event_jtDadosClienteMouseClicked
+
+    private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
+        jtNome.setEnabled(true);
+        jtCpf.setEnabled(true);
+        jtEmail.setEnabled(true);
+        jbSalvar.setEnabled(true);
+        jbEditar.setEnabled(false);
+    }//GEN-LAST:event_jbEditarActionPerformed
+
+    private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
+        Cliente c = new Cliente();
+        c.setNome(jtNome.getText());
+        c.setCpf(jtCpf.getText());
+        c.setEmail(jtEmail.getText());
+        c.setCodigo(Integer.parseInt(jtId.getText()));
+        ClienteDAO cDao = new ClienteDAO();
+        cDao.updateCliente(c);
+        atualizaTabela();
+    }//GEN-LAST:event_jbSalvarActionPerformed
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
+        Cliente c = new Cliente();
+        c.setCodigo(Integer.parseInt(jtId.getText()));
+        if (JOptionPane.showConfirmDialog(null, "Deseja continuar?", "DELETAR", JOptionPane.YES_NO_OPTION) == 0) {
+            ClienteDAO cDao = new ClienteDAO();
+            cDao.deleteCliente(c);
+            atualizaTabela();
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhuma alteração foi realizada");
+        }
+        limpaCampos();
+    }//GEN-LAST:event_jbExcluirActionPerformed
     public void montaTable(ArrayList<Cliente> listC) {
         modelo = (DefaultTableModel) jtDadosCliente.getModel();
 
@@ -266,6 +341,31 @@ public class ConsultaCliente extends javax.swing.JInternalFrame {
         c.setCpf(jtDadosCliente.getValueAt(linha, 2).toString());
         c.setEmail(jtDadosCliente.getValueAt(linha, 3).toString());
     }
+    
+    public void limpaTabela() {
+        modelo = (DefaultTableModel) jtDadosCliente.getModel();
+
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+    }
+
+    public void atualizaTabela() {
+        limpaTabela();
+        try {
+            listaCliente = cliente.todosUsuarios();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        montaTable(listaCliente);
+    }
+
+    public void limpaCampos() {
+        jtNome.setText("");
+        jtCpf.setText("");
+        jtEmail.setText("");
+        jtId.setText("");
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -281,6 +381,7 @@ public class ConsultaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbEditar;
     private javax.swing.JButton jbExcluir;
     private javax.swing.JButton jbPesquisar;
+    private javax.swing.JButton jbSalvar;
     private javax.swing.JTextField jtCpf;
     private javax.swing.JTable jtDadosCliente;
     private javax.swing.JTextField jtEmail;

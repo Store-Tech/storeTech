@@ -13,15 +13,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Matheus
  */
-public class CadastroCliente extends javax.swing.JInternalFrame{
+public class CadastroCliente extends javax.swing.JInternalFrame {
 
     private boolean usuarioValido;
     private boolean verificaSenha;
+    private boolean verificaEmail;
+    private boolean verificaCpf;
+
     public CadastroCliente() {
         initComponents();
     }
@@ -55,11 +57,13 @@ public class CadastroCliente extends javax.swing.JInternalFrame{
         jtNome = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jftCpf = new javax.swing.JFormattedTextField();
-        jLabel8 = new javax.swing.JLabel();
+        jlAvisoEmail = new javax.swing.JLabel();
+        jlAvisoCpf = new javax.swing.JLabel();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
         setBackground(new java.awt.Color(255, 153, 153));
+        setClosable(true);
         setForeground(java.awt.Color.gray);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 51));
@@ -111,6 +115,11 @@ public class CadastroCliente extends javax.swing.JInternalFrame{
             }
         });
 
+        jtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtEmailFocusLost(evt);
+            }
+        });
         jtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtEmailActionPerformed(evt);
@@ -177,6 +186,11 @@ public class CadastroCliente extends javax.swing.JInternalFrame{
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jftCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jftCpfFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -187,7 +201,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame{
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtEmail)
-                    .addComponent(jpSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                    .addComponent(jpSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                     .addComponent(jpConfirmaSenha)
                     .addComponent(jtNome)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -199,10 +213,11 @@ public class CadastroCliente extends javax.swing.JInternalFrame{
                             .addComponent(jtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jftCpf)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jftCpf)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jlAvisoCpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2)
@@ -210,14 +225,14 @@ public class CadastroCliente extends javax.swing.JInternalFrame{
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jlAvisoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jlComparaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel2))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(26, 26, 26))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,18 +246,19 @@ public class CadastroCliente extends javax.swing.JInternalFrame{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlAvisoUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel7)))
+                        .addComponent(jlAvisoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jftCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel8))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jlAvisoEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -287,53 +303,53 @@ public class CadastroCliente extends javax.swing.JInternalFrame{
 
     private void jtUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtUsuarioFocusLost
         String usuario;
-        boolean disponivel=false;
+        boolean disponivel = false;
         usuario = jtUsuario.getText();
         ClienteDAO cliente = new ClienteDAO();
         try {
-            if(!usuario.equals(""))
+            if (!usuario.equals("")) {
                 disponivel = cliente.usuarioDisponivel(usuario);
-                System.out.println(disponivel);
+            }
+            System.out.println(disponivel);
         } catch (SQLException ex) {
             Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if(disponivel && !usuario.contains(" ")){
-            jlAvisoUsuario.setForeground(new Color(0,255,0));
+
+        if (disponivel && !usuario.contains(" ")) {
+            jlAvisoUsuario.setForeground(new Color(0, 255, 0));
             jlAvisoUsuario.setText("Nome disponivél");
             usuarioValido = true;
-        }else if(usuario.contains(" ")){
-            jlAvisoUsuario.setForeground(new Color(255,102,102));
+        } else if (usuario.contains(" ")) {
+            jlAvisoUsuario.setForeground(new Color(255, 102, 102));
             jlAvisoUsuario.setText("Usuário contém espaço");
             usuarioValido = false;
-        }else {
-            jlAvisoUsuario.setForeground(new Color(255,102,102));
+        } else {
+            jlAvisoUsuario.setForeground(new Color(255, 102, 102));
             jlAvisoUsuario.setText("Usuário já existe");
             usuarioValido = false;
         }
     }//GEN-LAST:event_jtUsuarioFocusLost
 
     private void jpSenhaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpSenhaKeyReleased
-        
+
     }//GEN-LAST:event_jpSenhaKeyReleased
 
     private void jpConfirmaSenhaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpConfirmaSenhaKeyReleased
         String senha = jpSenha.getText();
         String confirmaSenha = jpConfirmaSenha.getText();
-        if(senha.equals(confirmaSenha)){
-            jlComparaSenha.setForeground(new Color(0,255,0));
+        if (senha.equals(confirmaSenha)) {
+            jlComparaSenha.setForeground(new Color(0, 255, 0));
             jlComparaSenha.setText("Senhas correspondem");
             verificaSenha = true;
-        }
-        else{
-            jlComparaSenha.setForeground(new Color(255,102,102));
+        } else {
+            jlComparaSenha.setForeground(new Color(255, 102, 102));
             jlComparaSenha.setText("Senhas não correspondem");
             verificaSenha = false;
         }
     }//GEN-LAST:event_jpConfirmaSenhaKeyReleased
 
     private void jtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtUsuarioActionPerformed
-        
+
     }//GEN-LAST:event_jtUsuarioActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -345,24 +361,35 @@ public class CadastroCliente extends javax.swing.JInternalFrame{
         c.setNome(jtNome.getText());
         c.setUsuario(jtUsuario.getText());
         c.setCpf(jftCpf.getText());
-        c.setEmail(jtNome.getText());
+        c.setEmail(jtEmail.getText());
         c.setSenha(jpSenha.getText());
         ClienteDAO cliente = new ClienteDAO();
-        if(usuarioValido && verificaSenha && !c.getNome().equals("") && !c.getEmail().equals("")){
-            try{
+        if (usuarioValido && verificaSenha && verificaEmail && !c.getNome().equals("") && !c.getEmail().equals("")) {
+            try {
                 cliente.adicionaUsuario(c);
                 JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso");
+                jtNome.setText("");
+                jtUsuario.setText("");
+                jftCpf.setText("");
+                jtEmail.setText("");
+                jpSenha.setText("");
+                jpConfirmaSenha.setText("");
+                jlAvisoEmail.setText("");
+                jlComparaSenha.setText("");
+                jlAvisoUsuario.setText("");
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar usuario. Erro: " + e);
             }
-        }else if(!usuarioValido)
+        } else if (!usuarioValido) {
             JOptionPane.showMessageDialog(null, "O usuário passado já existe");
-        else if(!usuarioValido && c.getUsuario().equals(""))
+        } else if (!usuarioValido && c.getUsuario().equals("")) {
             JOptionPane.showMessageDialog(null, "O usuário não foi preenchido");
-        else if(!verificaSenha)
+        } else if (!verificaSenha) {
             JOptionPane.showMessageDialog(null, "As senhas não correspondem");
-        else if(c.getNome().equals("") || c.getUsuario().equals("") || c.getEmail().equals("")){
+        } else if (c.getNome().equals("") || c.getUsuario().equals("") || c.getEmail().equals("")) {
             JOptionPane.showMessageDialog(null, "Um ou mais campos estão vazios");
+        } else if (!verificaEmail) {
+            JOptionPane.showMessageDialog(null, "O email informado não é válido");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -373,10 +400,37 @@ public class CadastroCliente extends javax.swing.JInternalFrame{
     private void jtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtNomeActionPerformed
-    
-    
-    
-    
+
+    private void jtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtEmailFocusLost
+        String email = jtEmail.getText();
+        if (email.contains("@") && (email.contains(".com") || email.contains(".br"))) {
+            jlAvisoEmail.setText("");
+            verificaEmail = true;
+        } else {
+            jlAvisoEmail.setForeground(new Color(255, 102, 102));
+            jlAvisoEmail.setText("Email inválido");
+            verificaEmail = false;
+        }
+
+    }//GEN-LAST:event_jtEmailFocusLost
+
+    private void jftCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jftCpfFocusLost
+        String cpf = jftCpf.getText();
+        ClienteDAO cliente = new ClienteDAO();
+        try {
+            if (cliente.cpfExistente(cpf)) {  
+                jlAvisoCpf.setText("");
+                verificaCpf = true;
+            } else {
+                jlAvisoCpf.setForeground(new Color(255, 102, 102));
+                jlAvisoCpf.setText("CPF já cadastrado");
+                verificaCpf = false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jftCpfFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -389,10 +443,11 @@ public class CadastroCliente extends javax.swing.JInternalFrame{
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JFormattedTextField jftCpf;
+    private javax.swing.JLabel jlAvisoCpf;
+    private javax.swing.JLabel jlAvisoEmail;
     private javax.swing.JLabel jlAvisoUsuario;
     private javax.swing.JLabel jlComparaSenha;
     private javax.swing.JPasswordField jpConfirmaSenha;

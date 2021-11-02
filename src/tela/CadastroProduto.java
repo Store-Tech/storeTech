@@ -47,9 +47,10 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         jtCodProd = new javax.swing.JTextField();
         jtPreco = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(255, 153, 153));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setClosable(true);
         setForeground(java.awt.Color.gray);
-        setPreferredSize(new java.awt.Dimension(402, 475));
+        setPreferredSize(new java.awt.Dimension(335, 398));
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 51));
 
@@ -170,7 +171,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
                                     .addComponent(jlPreco)
                                     .addGap(61, 61, 61))
                                 .addComponent(jtPreco)))))
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +211,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
