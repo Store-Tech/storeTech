@@ -360,7 +360,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         Cliente c = new Cliente();
         c.setNome(jtNome.getText());
         c.setUsuario(jtUsuario.getText());
-        c.setCpf(jftCpf.getText());
+        c.setCpf(jftCpf.getText().replaceAll("[.,-]", ""));
         c.setEmail(jtEmail.getText());
         c.setSenha(jpSenha.getText());
         ClienteDAO cliente = new ClienteDAO();

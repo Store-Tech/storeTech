@@ -91,27 +91,6 @@ public class ClienteDAO {
         return disponivel;
     }
 
-    public int retornaCodProd() throws SQLException {
-        Conexao conexao = new Conexao();
-        con = conexao.getConexao();
-        String SQL = "SELECT MAX(idC) FROM tb_cliente";
-        int codigo = 0;
-        ResultSet rs = null;
-        try {
-            pst = con.prepareStatement(SQL);
-            rs = pst.executeQuery();
-            Object result = rs.getObject(1);
-            if (result != null) {
-                codigo = ((Integer) result) + 1;
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao resgatar código do produto. Erro: " + e);
-        }
-        rs.close();
-        conexao.fecharConexao();
-        return codigo;
-    }
-
     public ArrayList todosUsuarios() throws SQLException {
         ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
         Conexao conexao = new Conexao();

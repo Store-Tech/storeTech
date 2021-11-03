@@ -5,6 +5,8 @@
  */
 package tela;
 
+import DAO.ProdutoDAO;
+import Model.Produto;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -38,14 +40,14 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jlCodProd = new javax.swing.JLabel();
         jlPreco = new javax.swing.JLabel();
-        jtNomProd = new javax.swing.JTextField();
-        jtQuant = new javax.swing.JTextField();
+        jtNomeProd = new javax.swing.JTextField();
         jlQuantidade = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jlNomProd = new javax.swing.JLabel();
         jtCodProd = new javax.swing.JTextField();
-        jtPreco = new javax.swing.JTextField();
+        jftPreco = new javax.swing.JFormattedTextField();
+        jftQuant = new javax.swing.JFormattedTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -86,20 +88,14 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         jlPreco.setForeground(new java.awt.Color(255, 255, 255));
         jlPreco.setText("Preço");
 
-        jtNomProd.addFocusListener(new java.awt.event.FocusAdapter() {
+        jtNomeProd.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jtNomProdFocusLost(evt);
+                jtNomeProdFocusLost(evt);
             }
         });
-        jtNomProd.addActionListener(new java.awt.event.ActionListener() {
+        jtNomeProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtNomProdActionPerformed(evt);
-            }
-        });
-
-        jtQuant.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtQuantActionPerformed(evt);
+                jtNomeProdActionPerformed(evt);
             }
         });
 
@@ -131,6 +127,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         jlNomProd.setForeground(new java.awt.Color(255, 255, 255));
         jlNomProd.setText("Nome do produto");
 
+        jtCodProd.setEnabled(false);
         jtCodProd.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jtCodProdFocusLost(evt);
@@ -142,6 +139,11 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
             }
         });
 
+        jftPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jftPreco.setToolTipText("valor do produto. Ex: 2,99");
+
+        jftQuant.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -149,29 +151,29 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlNomProd)
-                    .addComponent(jtCodProd, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlCodProd)
-                    .addComponent(jtNomProd, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jlQuantidade)
-                                    .addGap(58, 58, 58))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jtQuant)
-                                    .addGap(24, 24, 24)))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jlPreco)
-                                    .addGap(61, 61, 61))
-                                .addComponent(jtPreco)))))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlNomProd)
+                            .addComponent(jtCodProd, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlCodProd)
+                            .addComponent(jtNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(41, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlQuantidade)
+                            .addComponent(jftQuant, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jlPreco)
+                                .addGap(84, 84, 84))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jftPreco)
+                                .addGap(22, 22, 22))))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,15 +185,15 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jlNomProd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtNomProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlQuantidade)
                     .addComponent(jlPreco))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jftPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jftQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -218,28 +220,30 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtQuantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtQuantActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtQuantActionPerformed
-
-    private void jtNomProdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNomProdFocusLost
+    private void jtNomeProdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNomeProdFocusLost
         
        
-    }//GEN-LAST:event_jtNomProdFocusLost
+    }//GEN-LAST:event_jtNomeProdFocusLost
 
-    private void jtNomProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNomProdActionPerformed
+    private void jtNomeProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNomeProdActionPerformed
         
-    }//GEN-LAST:event_jtNomProdActionPerformed
+    }//GEN-LAST:event_jtNomeProdActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jtNomProd.setText("");
-        jtPreco.setText("");
-        jtQuant.setText("");
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    
+        Produto p = new Produto();
+        p.setNome(jtNomeProd.getText());
+        p.setQuantidade(Integer.parseInt(jftQuant.getText()));
+        p.setPreco(Double.parseDouble(jftPreco.getText()));
+        ProdutoDAO produto = new ProdutoDAO();
+        try {
+            produto.adicionaProduto(p);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtCodProdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtCodProdFocusLost
@@ -259,13 +263,13 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JFormattedTextField jftPreco;
+    private javax.swing.JFormattedTextField jftQuant;
     private javax.swing.JLabel jlCodProd;
     private javax.swing.JLabel jlNomProd;
     private javax.swing.JLabel jlPreco;
     private javax.swing.JLabel jlQuantidade;
     private javax.swing.JTextField jtCodProd;
-    private javax.swing.JTextField jtNomProd;
-    private javax.swing.JTextField jtPreco;
-    private javax.swing.JTextField jtQuant;
+    private javax.swing.JTextField jtNomeProd;
     // End of variables declaration//GEN-END:variables
 }
