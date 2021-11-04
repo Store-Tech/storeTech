@@ -328,7 +328,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbCadastrarClienteActionPerformed
 
     private void jbCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarProdutoActionPerformed
-        CadastroProduto cp = new CadastroProduto();
+        CadastroProduto cp = null;
+        try {
+            cp = new CadastroProduto();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jDesktopPane1.add(cp); 
         cp.setVisible(true);       
     }//GEN-LAST:event_jbCadastrarProdutoActionPerformed
