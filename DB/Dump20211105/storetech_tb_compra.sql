@@ -16,22 +16,19 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tb_endereco`
+-- Table structure for table `tb_compra`
 --
 
-DROP TABLE IF EXISTS `tb_endereco`;
+DROP TABLE IF EXISTS `tb_compra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tb_endereco` (
-  `Rua` varchar(100) NOT NULL,
-  `Cidade` varchar(45) NOT NULL,
-  `Estado` varchar(45) NOT NULL,
-  `CEP` varchar(15) NOT NULL,
-  `Pais` varchar(45) NOT NULL,
-  `ClienteFk` int NOT NULL,
-  UNIQUE KEY `ClienteFk_UNIQUE` (`ClienteFk`),
-  CONSTRAINT `ClienteFk` FOREIGN KEY (`ClienteFk`) REFERENCES `tb_cliente` (`ClienteId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `tb_compra` (
+  `CompraId` int NOT NULL,
+  `Situacao` varchar(45) NOT NULL,
+  `FormaPagamento` varchar(45) NOT NULL,
+  `Valor` int NOT NULL,
+  PRIMARY KEY (`CompraId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='			';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -43,4 +40,4 @@ CREATE TABLE `tb_endereco` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-05  9:39:21
+-- Dump completed on 2021-11-05  9:43:49

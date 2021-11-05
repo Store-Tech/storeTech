@@ -16,23 +16,20 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tb_cliente`
+-- Table structure for table `tb_produto`
 --
 
-DROP TABLE IF EXISTS `tb_cliente`;
+DROP TABLE IF EXISTS `tb_produto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tb_cliente` (
-  `ClienteId` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tb_produto` (
+  `ProdutoId` int NOT NULL AUTO_INCREMENT,
   `Nome` varchar(100) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `CPF` varchar(15) NOT NULL,
-  `Endereco` varchar(100) NOT NULL,
-  `Senha` varchar(15) NOT NULL,
-  PRIMARY KEY (`ClienteId`),
-  UNIQUE KEY `CPF_UNIQUE` (`CPF`),
-  UNIQUE KEY `Email_UNIQUE` (`Email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Preco` float NOT NULL,
+  `Qtd` int NOT NULL,
+  `tipoProd` enum('HARDWARE','PERIFERICOS','GAMES','FERRAMENTAS') DEFAULT NULL,
+  PRIMARY KEY (`ProdutoId`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -44,4 +41,4 @@ CREATE TABLE `tb_cliente` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-27 23:15:45
+-- Dump completed on 2021-11-05  9:43:51

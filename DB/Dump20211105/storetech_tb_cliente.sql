@@ -16,22 +16,24 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tb_endereco`
+-- Table structure for table `tb_cliente`
 --
 
-DROP TABLE IF EXISTS `tb_endereco`;
+DROP TABLE IF EXISTS `tb_cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tb_endereco` (
-  `Rua` varchar(100) NOT NULL,
-  `Cidade` varchar(45) NOT NULL,
-  `Estado` varchar(45) NOT NULL,
-  `CEP` varchar(15) NOT NULL,
-  `Pais` varchar(45) NOT NULL,
-  `ClienteFk` int NOT NULL,
-  UNIQUE KEY `ClienteFk_UNIQUE` (`ClienteFk`),
-  CONSTRAINT `ClienteFk` FOREIGN KEY (`ClienteFk`) REFERENCES `tb_cliente` (`ClienteId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `tb_cliente` (
+  `ClienteId` int NOT NULL AUTO_INCREMENT,
+  `Nome` varchar(100) NOT NULL,
+  `Usuario` varchar(45) NOT NULL,
+  `Email` varchar(100) NOT NULL,
+  `CPF` varchar(15) NOT NULL,
+  `Endereco` varchar(100) DEFAULT NULL,
+  `Senha` varchar(15) NOT NULL,
+  PRIMARY KEY (`ClienteId`),
+  UNIQUE KEY `CPF_UNIQUE` (`CPF`),
+  UNIQUE KEY `Email_UNIQUE` (`Email`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -43,4 +45,4 @@ CREATE TABLE `tb_endereco` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-27 23:15:46
+-- Dump completed on 2021-11-05  9:43:50
