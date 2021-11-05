@@ -466,9 +466,8 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         p.setNome(jtNomeProd.getText());
         p.setQuantidade(Integer.parseInt(jftQuant.getText()));
         p.setPreco(Double.parseDouble(jftPreco.getText().replaceAll("[.]", "").replaceAll("[,]", ".")));
-        String teste =  (String) jcbTiposProd.getSelectedItem();
-        System.out.println(teste);
-        TipoProduto tp = Enum.valueOf(TipoProduto.class, teste);
+        String tipoProd =  (String) jcbTiposProd.getSelectedItem();
+        TipoProduto tp = Enum.valueOf(TipoProduto.class, tipoProd);
         p.setTipoProd(tp);
         ProdutoDAO produto = new ProdutoDAO();
         try {

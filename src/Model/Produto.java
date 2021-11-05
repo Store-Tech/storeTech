@@ -4,7 +4,7 @@ package Model;
  *
  * @author Matheus
  */
-public class Produto {
+public class Produto implements Comparable<Produto>{
     
     private int codProd, quantidade;
     private String nome;
@@ -60,6 +60,16 @@ public class Produto {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    @Override
+    public int compareTo(Produto outroProduto) {
+        if(this.preco< outroProduto.getPreco()){
+            return -1;
+        }else if(this.preco > outroProduto.getPreco()){
+            return 1;
+        }
+        return 0;
     }
     
     

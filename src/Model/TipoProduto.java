@@ -12,4 +12,13 @@ package Model;
 public enum TipoProduto {
     
     PERIFERICOS, HARDWARE, FERRAMENTAS, GAMES;
+    
+    public static TipoProduto getTipoProd(String tipoProd){
+        for(TipoProduto tp:TipoProduto.values()){
+            if(tp.toString().equals(tipoProd.toUpperCase())){
+                return tp;
+            }
+        }
+        return null;
+    }
 }

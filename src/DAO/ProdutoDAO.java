@@ -2,6 +2,7 @@ package DAO;
 
 import Model.Cliente;
 import Model.Produto;
+import Model.TipoProduto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -75,5 +76,69 @@ public class ProdutoDAO {
         rs.close();
         conexao.fecharConexao();
         return tiposProd;
+    }
+    
+    public ArrayList todosProdutos() throws SQLException {
+        ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
+        Conexao conexao = new Conexao();
+        con = conexao.getConexao();
+        ResultSet rs = null;
+        String SQL = "SELECT PRODUTOID, NOME, PRECO, QTD, TIPOPROD FROM TB_PRODUTO";
+        try {
+            pst = con.prepareStatement(SQL);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Produto produto = new Produto();
+                produto.setCodProd(rs.getInt("PRODUTOID"));
+                produto.setNome(rs.getString("NOME"));
+                produto.setPreco(rs.getDouble("PRECO"));
+                produto.setQuantidade(rs.getInt("QTD"));
+                produto.setTipoProd(TipoProduto.getTipoProd(rs.getString("TIPOPROD")));
+                listaProdutos.add(produto);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao resgatar a lista de clientes. Erro: " + e);
+        }
+        rs.close();
+        conexao.fecharConexao();
+        return listaProdutos;
+    }
+
+    public ArrayList pesquisaProduto(Produto p) throws SQLException {
+        ArrayList<Produto> listaProduto = new ArrayList<Produto>();
+        Conexao conexao = new Conexao();
+        con = conexao.getConexao();
+        ResultSet rs = null;
+        String SQL = "SELECT PRODUTOID, NOME, PRECO, QTD, TIPOPROD FROM TB_PRODUTO WHERE NOME LIKE ? AND TIPOPROD like ?";
+        try {
+            pst = con.prepareStatement(SQL);
+            pst.setString(1, "%" + p.getNome() + "%");
+            if(p.getTipoProd()!=null)
+                pst.setString(2, "%" + p.getTipoProd().toString() + "%");
+            else
+                pst.setString(2, "%%");
+            rs = pst.executeQuery();
+            if (rs!=null) {
+                while (rs.next()) {
+                    Produto produto = new Produto();
+                    produto.setCodProd(rs.getInt("PRODUTOID"));
+                    produto.setNome(rs.getString("NOME"));
+                    produto.setPreco(rs.getDouble("PRECO"));
+                    produto.setQuantidade(rs.getInt("QTD"));
+                    produto.setTipoProd(TipoProduto.getTipoProd(rs.getString("TIPOPROD")));
+                    listaProduto.add(produto);
+                }
+            } else {
+                rs.close();
+                conexao.fecharConexao();
+                listaProduto.add(p);
+                return listaProduto;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao resgatar a lista de clientes. Erro: " + e);
+        }
+        rs.close();
+        conexao.fecharConexao();
+        return listaProduto;
     }
 }
