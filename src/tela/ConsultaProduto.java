@@ -33,6 +33,8 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
             return false;
         }
     };
+    private Produto produtoSelecionado;
+    
     private ProdutoDAO produto = new ProdutoDAO();
     private ArrayList<Produto> listaProduto = new ArrayList<Produto>();
 
@@ -285,11 +287,12 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
-        jtNome.setEnabled(true);
-        jtCpf.setEnabled(true);
-        jtEmail.setEnabled(true);
-        jbSalvar.setEnabled(true);
-        jbEditar.setEnabled(false);
+        try {
+            AlterarProduto alterar = new AlterarProduto(produtoSelecionado);
+            alterar.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jbEditarActionPerformed
 
     private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
@@ -310,19 +313,8 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbPesquisarActionPerformed
 
     private void jtDadosClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtDadosClienteMouseClicked
-        Cliente c = new Cliente();
-        resgataValoresTable(c);
-        jtId.setText(String.valueOf(c.getCodigo()));
-        jtNome.setText(c.getNome());
-        jtCpf.setText(c.getCpf());
-        jtEmail.setText(c.getEmail());
-        jbPesquisar.setEnabled(false);
-        jbExcluir.setEnabled(true);
+        produtoSelecionado = resgataValoresTable();
         jbEditar.setEnabled(true);
-        jtNome.setEnabled(false);
-        jtCpf.setEnabled(false);
-        jtEmail.setEnabled(false);
-        jtId.setEnabled(false);
     }//GEN-LAST:event_jtDadosClienteMouseClicked
 
     private void jbFiltrarPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFiltrarPrecoActionPerformed
@@ -370,12 +362,17 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
 
     }
 
-    public void resgataValoresTable(Cliente c) {
+    public Produto resgataValoresTable() {
         int linha = this.jtDadosCliente.getSelectedRow();
-        c.setCodigo(Integer.parseInt(jtDadosCliente.getValueAt(linha, 0).toString()));
-        c.setNome(jtDadosCliente.getValueAt(linha, 1).toString());
-        c.setCpf(jtDadosCliente.getValueAt(linha, 2).toString());
-        c.setEmail(jtDadosCliente.getValueAt(linha, 3).toString());
+        Produto p = new Produto();
+        p.setCodProd(Integer.parseInt(jtDadosCliente.getValueAt(linha, 0).toString()));
+        p.setNome(jtDadosCliente.getValueAt(linha, 1).toString());
+        p.setPreco(Double.parseDouble(jtDadosCliente.getValueAt(linha, 2).toString()));
+        p.setQuantidade(Integer.parseInt(jtDadosCliente.getValueAt(linha, 3).toString()));
+        String tipoProd = jtDadosCliente.getValueAt(linha, 4).toString();
+        TipoProduto tp = Enum.valueOf(TipoProduto.class, tipoProd);
+        p.setTipoProd(tp);
+        return p;
     }
 
     public void limpaTabela() {

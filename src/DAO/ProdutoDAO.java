@@ -141,4 +141,29 @@ public class ProdutoDAO {
         conexao.fecharConexao();
         return listaProduto;
     }
+    
+    public Produto retornaProduto(int codProd) throws SQLException{
+        Produto p = new Produto();
+        Conexao conexao = new Conexao();
+        con = conexao.getConexao();
+        ResultSet rs = null;
+        String SQL = "SELECT PRODUTOID, NOME, PRECO, QTD, TIPOPROD FROM TB_PRODUTO WHERE PRODUTOID = ?";
+        try {
+            pst = con.prepareStatement(SQL);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Produto produto = new Produto();
+                produto.setCodProd(rs.getInt("PRODUTOID"));
+                produto.setNome(rs.getString("NOME"));
+                produto.setPreco(rs.getDouble("PRECO"));
+                produto.setQuantidade(rs.getInt("QTD"));
+                produto.setTipoProd(TipoProduto.getTipoProd(rs.getString("TIPOPROD")));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao resgatar a lista de clientes. Erro: " + e);
+        }
+        rs.close();
+        conexao.fecharConexao();
+        return p;
+    }
 }
