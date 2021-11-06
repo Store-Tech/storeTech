@@ -33,16 +33,17 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
             return false;
         }
     };
-    private Produto produtoSelecionado;
-    
+    private Principal principal;
+    private Produto produtoSelecionado;  
     private ProdutoDAO produto = new ProdutoDAO();
     private ArrayList<Produto> listaProduto = new ArrayList<Produto>();
 
-    public ConsultaProduto() throws SQLException {
+    public ConsultaProduto(Principal principal) throws SQLException {
         initComponents(); 
+        this.principal = principal;
         listaProduto = produto.todosProdutos();
         montaTable(listaProduto);
-        preencheComboBox();
+        preencheComboBox(); 
     }
 
     /**
@@ -287,12 +288,14 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
+        AlterarProduto alterar = null;
         try {
-            AlterarProduto alterar = new AlterarProduto(produtoSelecionado);
-            alterar.setVisible(true);
+            alterar = new AlterarProduto(produtoSelecionado);
         } catch (SQLException ex) {
             Logger.getLogger(ConsultaProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
+        principal.jdp.add(alterar);
+        alterar.setVisible(true);
     }//GEN-LAST:event_jbEditarActionPerformed
 
     private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
@@ -314,6 +317,7 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
 
     private void jtDadosClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtDadosClienteMouseClicked
         produtoSelecionado = resgataValoresTable();
+        
         jbEditar.setEnabled(true);
     }//GEN-LAST:event_jtDadosClienteMouseClicked
 

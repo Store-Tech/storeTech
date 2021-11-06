@@ -400,7 +400,7 @@ public class Principal extends javax.swing.JFrame {
     private void jbConsultaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultaProdutoActionPerformed
         ConsultaProduto consultProd = null;
         try {
-            consultProd = new ConsultaProduto();
+            consultProd = new ConsultaProduto(this);
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
