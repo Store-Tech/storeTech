@@ -286,6 +286,7 @@ public class Principal extends javax.swing.JFrame {
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
         jDesktopPane1.setForeground(new java.awt.Color(255, 255, 255));
         jDesktopPane1.setDoubleBuffered(true);
+        jDesktopPane1.setEnabled(false);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
