@@ -25,7 +25,7 @@ import java.util.Vector;
  *
  * @author Matheus
  */
-public class ConsultaProduto extends javax.swing.JInternalFrame {
+public class TelaVendas extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -39,7 +39,7 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
     private ArrayList<Produto> listaProduto = new ArrayList<Produto>();
     private ArrayList<Produto> carrinho = new ArrayList<Produto>();
 
-    public ConsultaProduto(Principal principal) throws SQLException {
+    public TelaVendas(Principal principal) throws SQLException {
         super("Consultar Produto", true, true, false, true);
         this.principal = principal;
         initComponents();
@@ -68,8 +68,12 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
         jtNome = new javax.swing.JTextField();
         jbPesquisar = new javax.swing.JButton();
         jbEditar = new javax.swing.JButton();
+        jCheckMenorPreco = new javax.swing.JCheckBox();
+        jCheckMaiorPreco = new javax.swing.JCheckBox();
         jcbTipoProd = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
+        jbEditar1 = new javax.swing.JButton();
+        jbEditar2 = new javax.swing.JButton();
 
         jLabel3.setText("jLabel3");
 
@@ -150,35 +154,73 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
             }
         });
 
+        jCheckMenorPreco.setText("Menor preço");
+        jCheckMenorPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckMenorPrecoActionPerformed(evt);
+            }
+        });
+
+        jCheckMaiorPreco.setText("Maior preço");
+        jCheckMaiorPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckMaiorPrecoActionPerformed(evt);
+            }
+        });
+
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Tipo de produto");
+
+        jbEditar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrinho-de-compras-de-design-xadrez (1).png"))); // NOI18N
+        jbEditar1.setBorder(null);
+        jbEditar1.setBorderPainted(false);
+        jbEditar1.setContentAreaFilled(false);
+        jbEditar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEditar1ActionPerformed(evt);
+            }
+        });
+
+        jbEditar2.setText("Adicionar ao carrinho");
+        jbEditar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEditar2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jcbTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jcbTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jbEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbEditar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckMenorPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckMaiorPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -188,19 +230,27 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jbPesquisar)
-                    .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbEditar2))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbEditar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jcbTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)))
+                            .addComponent(jLabel8))))
+                .addGap(47, 47, 47)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbEditar)))
-                .addGap(44, 44, 44)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addComponent(jCheckMaiorPreco)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckMenorPreco)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbEditar1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -227,7 +277,7 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
         try {
             alterar = new AlterarProduto(produtoSelecionado);
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaProduto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaVendas.class.getName()).log(Level.SEVERE, null, ex);
         }
         getParent().add(alterar);
         alterar.setVisible(true);
@@ -245,7 +295,7 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
         try {
             listaProduto = produto.pesquisaProduto(p);
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaProduto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TelaVendas.class.getName()).log(Level.SEVERE, null, ex);
         }
         montaTable(listaProduto);
     }//GEN-LAST:event_jbPesquisarActionPerformed
@@ -255,6 +305,47 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
         
         jbEditar.setEnabled(true);
     }//GEN-LAST:event_jtProdutosMouseClicked
+
+    private void jCheckMenorPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckMenorPrecoActionPerformed
+        if (jCheckMenorPreco.isSelected()) {
+            tableCrescente(listaProduto);
+        } else {
+            try {
+                atualizaTabela();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaVendas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+    }//GEN-LAST:event_jCheckMenorPrecoActionPerformed
+
+    private void jCheckMaiorPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckMaiorPrecoActionPerformed
+        if (jCheckMaiorPreco.isSelected()) {
+            tableDecrescente(listaProduto);
+        } else {
+            try {
+                atualizaTabela();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaVendas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_jCheckMaiorPrecoActionPerformed
+
+    private void jbEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditar1ActionPerformed
+        try {
+            Carrinho c = new Carrinho(principal, carrinho);
+            getParent().add(c);
+            c.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaVendas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbEditar1ActionPerformed
+
+    private void jbEditar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditar2ActionPerformed
+        carrinho.add(adicionarProdutoCarrinho());
+    }//GEN-LAST:event_jbEditar2ActionPerformed
     public void montaTable(ArrayList<Produto> listP) {
         modelo = (DefaultTableModel) jtProdutos.getModel();
 
@@ -331,6 +422,8 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox jCheckMaiorPreco;
+    private javax.swing.JCheckBox jCheckMenorPreco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -340,6 +433,8 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton jbEditar;
+    private javax.swing.JButton jbEditar1;
+    private javax.swing.JButton jbEditar2;
     private javax.swing.JButton jbPesquisar;
     private javax.swing.JComboBox<String> jcbTipoProd;
     private javax.swing.JTextField jtNome;

@@ -278,6 +278,7 @@ public class ConsultaCliente extends javax.swing.JInternalFrame {
             Logger.getLogger(ConsultaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         montaTable(listaCliente);
+        limpaCampos();
     }//GEN-LAST:event_jbPesquisarActionPerformed
 
     private void jtDadosClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtDadosClienteMouseClicked

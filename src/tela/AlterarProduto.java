@@ -29,6 +29,7 @@ public class AlterarProduto extends javax.swing.JInternalFrame {
         initComponents();
         preencheComboBox();
         this.p = p;
+        carregaInfProd();
     }
 
     /**
@@ -518,6 +519,7 @@ public class AlterarProduto extends javax.swing.JInternalFrame {
     }
     
     public void carregaInfProd() throws SQLException{
+        jtCodProd.setText(String.valueOf(p.getCodProd()));
         jtNomeProd.setText(p.getNome());
         jftPreco.setText(String.valueOf(p.getPreco()));
         jftQuant.setText(String.valueOf(p.getQuantidade()));

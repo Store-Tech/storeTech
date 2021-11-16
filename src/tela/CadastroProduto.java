@@ -73,7 +73,6 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setForeground(java.awt.Color.gray);
-        setPreferredSize(null);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 51));
 
