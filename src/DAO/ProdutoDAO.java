@@ -12,11 +12,11 @@ import javax.swing.JOptionPane;
 import storeTech.Conexao;
 
 public class ProdutoDAO {
-    
+
     private PreparedStatement pst;
-    Connection con; 
-    
-    public int retornaCodProd() throws SQLException {
+    Connection con;
+
+    public int retornaCodProd(){
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
         String SQL = "SELECT MAX(CLIENTEID) FROM tb_cliente";
@@ -29,15 +29,15 @@ public class ProdutoDAO {
             if (result != null) {
                 codigo = ((Integer) result) + 1;
             }
+            rs.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao resgatar código do Produto. Erro: " + e);
-        }
-        rs.close();
+        }      
         conexao.fecharConexao();
         return codigo;
     }
-    
-    public void adicionaProduto(Produto p) throws SQLException {
+
+    public void adicionaProduto(Produto p){
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
         String SQL = "insert into tb_produto (NOME, PRECO, QTD, TIPOPROD) values(?,?,?,?)";
@@ -48,37 +48,37 @@ public class ProdutoDAO {
             pst.setInt(3, p.getQuantidade());
             pst.setString(4, p.getTipoProd().toString());
             pst.executeUpdate();
+            pst.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar produto. Erro: " + e);
         }
-        pst.close();
         conexao.fecharConexao();
     }
-    
-    public String[] retornaTiposProduto() throws SQLException{
-        String [] tiposProd = null;
+
+    public String[] retornaTiposProduto(){
+        String[] tiposProd = null;
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
         ResultSet rs = null;
-        String SQL = "SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS\n" +
-        " WHERE TABLE_NAME = 'tb_produto' AND COLUMN_NAME = 'tipoProd'";
+        String SQL = "SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS\n"
+                + " WHERE TABLE_NAME = 'tb_produto' AND COLUMN_NAME = 'tipoProd'";
         try {
             pst = con.prepareStatement(SQL);
             rs = pst.executeQuery();
             while (rs.next()) {
                 String tipos = rs.getString("COLUMN_TYPE");
-                tipos = tipos.substring(5, tipos.length()-1).replaceAll("'", "");
+                tipos = tipos.substring(5, tipos.length() - 1).replaceAll("'", "");
                 tiposProd = tipos.split(",");
             }
+            rs.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao resgatar a lista de clientes. Erro: " + e);
-        }
-        rs.close();
+        } 
         conexao.fecharConexao();
         return tiposProd;
     }
-    
-    public ArrayList todosProdutos() throws SQLException {
+
+    public ArrayList todosProdutos(){
         ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
@@ -96,15 +96,16 @@ public class ProdutoDAO {
                 produto.setTipoProd(TipoProduto.getTipoProd(rs.getString("TIPOPROD")));
                 listaProdutos.add(produto);
             }
+            rs.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao resgatar a lista de clientes. Erro: " + e);
         }
-        rs.close();
+
         conexao.fecharConexao();
         return listaProdutos;
     }
 
-    public ArrayList pesquisaProduto(Produto p) throws SQLException {
+    public ArrayList pesquisaProduto(Produto p){
         ArrayList<Produto> listaProduto = new ArrayList<Produto>();
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
@@ -113,12 +114,13 @@ public class ProdutoDAO {
         try {
             pst = con.prepareStatement(SQL);
             pst.setString(1, "%" + p.getNome() + "%");
-            if(p.getTipoProd()!=null)
+            if (p.getTipoProd() != null) {
                 pst.setString(2, "%" + p.getTipoProd().toString() + "%");
-            else
+            } else {
                 pst.setString(2, "%%");
+            }
             rs = pst.executeQuery();
-            if (rs!=null) {
+            if (rs != null) {
                 while (rs.next()) {
                     Produto produto = new Produto();
                     produto.setCodProd(rs.getInt("PRODUTOID"));
@@ -134,15 +136,15 @@ public class ProdutoDAO {
                 listaProduto.add(p);
                 return listaProduto;
             }
+            rs.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao resgatar a lista de clientes. Erro: " + e);
         }
-        rs.close();
         conexao.fecharConexao();
         return listaProduto;
     }
-    
-    public Produto retornaProduto(int codProd) throws SQLException{
+
+    public Produto retornaProduto(int codProd) {
         Produto p = new Produto();
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
@@ -158,12 +160,27 @@ public class ProdutoDAO {
                 produto.setPreco(rs.getDouble("PRECO"));
                 produto.setQuantidade(rs.getInt("QTD"));
                 produto.setTipoProd(TipoProduto.getTipoProd(rs.getString("TIPOPROD")));
+                rs.close();
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao resgatar a lista de clientes. Erro: " + e);
         }
-        rs.close();
         conexao.fecharConexao();
         return p;
+    }
+
+    public void deleteProduto(Produto p) {
+        Conexao conexao = new Conexao();
+        Connection con = conexao.getConexao();
+        String delete = "DELETE FROM storetech.TB_PRODUTO WHERE PRODUTOID= ?";
+        try {
+            pst = con.prepareStatement(delete);
+            pst.setInt(1, p.getCodProd());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Produto deletado com sucesso");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao deletar produto" + e);
+        }
+        conexao.fecharConexao();
     }
 }

@@ -17,7 +17,7 @@ public class VendasDAO {
     private PreparedStatement pst;
     Connection con;
 
-    public int adicionaVenda(Venda v, int ClienteId) throws SQLException {
+    public int adicionaVenda(Venda v, int ClienteId){
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
         int codVenda=0;
@@ -30,15 +30,15 @@ public class VendasDAO {
             pst.setInt(4, ClienteId);
             pst.executeUpdate();
             codVenda = retornaCodVenda();
+            pst.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar venda. Erro: " + e);
         }
-        pst.close();
         conexao.fecharConexao();
         return codVenda;
     }
 
-    public int retornaCodVenda() throws SQLException {
+    public int retornaCodVenda(){
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
         String SQL = "SELECT MAX(VENDAID) FROM tb_venda";
@@ -52,15 +52,15 @@ public class VendasDAO {
                 codigo = rs.getInt("MAX(VENDAID)");
                 System.out.println(codigo);
             }
+            rs.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao resgatar código da Venda. Erro: " + e);
         }
-        rs.close();
         conexao.fecharConexao();
         return codigo;
     }
 
-    public void adicionaItemVenda(ArrayList<Produto> listaCarrinho, int codVenda) throws SQLException {
+    public void adicionaItemVenda(ArrayList<Produto> listaCarrinho, int codVenda){
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
         String SQL = "insert into tb_item_venda (VENDAID, PRODUTOID, QTD) values(?,?,?)";
@@ -72,10 +72,10 @@ public class VendasDAO {
                 pst.setDouble(3, p.getQuantidade());
                 pst.executeUpdate();
             }
+            pst.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar item de venda. Erro: " + e);
         }
-        pst.close();
         conexao.fecharConexao();
     }
 

@@ -23,7 +23,7 @@ public class ClienteDAO {
     private PreparedStatement pst;
     Connection con;
 
-    public void adicionaUsuario(Cliente c) throws SQLException {
+    public void adicionaUsuario(Cliente c) {
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
         String SQL = "insert into tb_cliente (NOME, USUARIO, EMAIL, CPF, SENHA) values(?,?,?,?,?);";
@@ -35,14 +35,14 @@ public class ClienteDAO {
             pst.setString(4, c.getCpf());
             pst.setString(5, c.getSenha());
             pst.executeUpdate();
+            pst.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário. Erro: " + e);
         }
-        pst.close();
         conexao.fecharConexao();
     }
 
-    public boolean validaLogin(String usuario, String senha) throws SQLException {
+    public boolean validaLogin(String usuario, String senha) {
         boolean autentica = false;
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
@@ -58,16 +58,16 @@ public class ClienteDAO {
             } else {
                 autentica = false;
             }
+            rs.close();
+            pst.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao autenticar. Erro: " + e);
         }
-        rs.close();
-        pst.close();
         conexao.fecharConexao();
         return autentica;
     }
 
-    public boolean usuarioDisponivel(String usuario) throws SQLException {
+    public boolean usuarioDisponivel(String usuario) {
         boolean disponivel = false;
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
@@ -82,16 +82,16 @@ public class ClienteDAO {
             } else {
                 disponivel = true;
             }
+            rs.close();
+            pst.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar usuário no banco. Erro: " + e);
         }
-        rs.close();
-        pst.close();
         conexao.fecharConexao();
         return disponivel;
     }
 
-    public ArrayList todosUsuarios() throws SQLException {
+    public ArrayList todosUsuarios() {
         ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
@@ -109,15 +109,15 @@ public class ClienteDAO {
                 cliente.setEmail(rs.getString("EMAIL"));
                 listaCliente.add(cliente);
             }
+            rs.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao resgatar a lista de clientes. Erro: " + e);
         }
-        rs.close();
         conexao.fecharConexao();
         return listaCliente;
     }
 
-    public boolean cpfExistente(String cpf) throws SQLException {
+    public boolean cpfExistente(String cpf) {
         boolean disponivel = false;
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
@@ -132,11 +132,11 @@ public class ClienteDAO {
             } else {
                 disponivel = true;
             }
+            rs.close();
+            pst.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao consultar CPF no banco. Erro: " + e);
         }
-        rs.close();
-        pst.close();
         conexao.fecharConexao();
         return disponivel;
     }
@@ -158,7 +158,7 @@ public class ClienteDAO {
         conexao.fecharConexao();
     }
 
-    public ArrayList pesquisaUsuario(Cliente c) throws SQLException {
+    public ArrayList pesquisaUsuario(Cliente c){
         ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
@@ -193,15 +193,15 @@ public class ClienteDAO {
                 listaCliente.add(c);
                 return listaCliente;
             }
+            rs.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao resgatar a lista de clientes. Erro: " + e);
         }
-        rs.close();
         conexao.fecharConexao();
         return listaCliente;
     }
 
-    public void deleteCliente(Cliente c) {
+    public void deleteCliente(Cliente c){
         Conexao conexao = new Conexao();
         Connection con = conexao.getConexao();
         String delete = "DELETE FROM storetech.TB_CLIENTE WHERE CLIENTEID = ?";
@@ -216,7 +216,7 @@ public class ClienteDAO {
         conexao.fecharConexao();
     }
 
-    public Cliente pesquisaUnicoUsuario(String CPF) throws SQLException {
+    public Cliente pesquisaUnicoUsuario(String CPF){
         Cliente cliente = null;
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
@@ -243,7 +243,6 @@ public class ClienteDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao resgatar a lista de clientes. Erro: " + e);
         }
-        rs.close();
         conexao.fecharConexao();
         return cliente;
     }

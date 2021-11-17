@@ -7,11 +7,18 @@
             <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/tela/CadastroProduto.java</file>
             <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/tela/Principal.java</file>
             <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/DAO/ProdutoDAO.java</file>
-            <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/tela/ConsultaCliente.java</file>
+            <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/DAO/VendasDAO.java</file>
+            <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/Model/TipoPagamento.java</file>
             <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/tela/CadastroCliente.java</file>
-            <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/tela/Carrinho.java</file>
             <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/tela/ConsultaProduto.java</file>
             <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/tela/AlterarProduto.java</file>
+            <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/Model/Produto.java</file>
+            <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/tela/TelaVendas.java</file>
+            <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/tela/ConsultaCliente.java</file>
+            <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/tela/TrocaSenha.java</file>
+            <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/tela/Carrinho.java</file>
+            <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/Model/TipoProduto.java</file>
+            <file>file:/C:/Users/Matheus/Documents/NetBeansProjects/storeTech/src/Model/Venda.java</file>
         </group>
     </open-files>
 </project-private>

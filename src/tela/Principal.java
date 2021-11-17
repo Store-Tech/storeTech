@@ -18,8 +18,9 @@ import javax.swing.JDesktopPane;
 public class Principal extends javax.swing.JFrame {
 
     public final JDesktopPane jdp = new JDesktopPane();
-    
-    public Principal() throws SQLException {
+    TelaVendas tv;
+
+    public Principal() {
         initComponents();
         abrirTelaVendas();
     }
@@ -40,6 +41,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jbCadastrarVenda = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jbFechar = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
@@ -184,6 +186,28 @@ public class Principal extends javax.swing.JFrame {
         jButton9.setBorderPainted(false);
         jButton9.setContentAreaFilled(false);
 
+        jbCadastrarVenda.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jbCadastrarVenda.setForeground(new java.awt.Color(255, 255, 255));
+        jbCadastrarVenda.setText("-Cadastrar Venda");
+        jbCadastrarVenda.setBorder(null);
+        jbCadastrarVenda.setBorderPainted(false);
+        jbCadastrarVenda.setContentAreaFilled(false);
+        jbCadastrarVenda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbCadastrarVenda.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jbCadastrarVenda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jbCadastrarVendaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jbCadastrarVendaMouseExited(evt);
+            }
+        });
+        jbCadastrarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCadastrarVendaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -201,19 +225,17 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jbCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(jbCadastrarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jbCadastrarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbCadastrarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbConsultaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jbConsultaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jbConsultaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(83, 83, 83))
-                                .addComponent(jbConsultaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel2)
+                                .addGap(83, 83, 83))
+                            .addComponent(jbConsultaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbConsultaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,6 +256,8 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jbCadastrarCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbCadastrarProduto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCadastrarVenda)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -242,7 +266,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jbConsultaProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbConsultaVenda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
                 .addComponent(jButton8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton9)
@@ -331,29 +355,21 @@ public class Principal extends javax.swing.JFrame {
 
     private void jbCadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarProdutoActionPerformed
         CadastroProduto cp = null;
-        try {
-            cp = new CadastroProduto();
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        jDesktopPane1.add(cp); 
-        cp.setVisible(true);       
+        cp = new CadastroProduto();
+        jDesktopPane1.add(cp);
+        cp.setVisible(true);
     }//GEN-LAST:event_jbCadastrarProdutoActionPerformed
 
     private void jbConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultaClienteActionPerformed
         ConsultaCliente consultCliente = null;
-        try {
-            consultCliente = new ConsultaCliente();
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        consultCliente = new ConsultaCliente();
         jDesktopPane1.add(consultCliente);
         consultCliente.setVisible(true);
     }//GEN-LAST:event_jbConsultaClienteActionPerformed
 
     private void jbCadastrarClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarClienteMouseEntered
         jbCadastrarCliente.setFont(new Font("Tahoma", Font.BOLD, 12));
-        
+
     }//GEN-LAST:event_jbCadastrarClienteMouseEntered
 
     private void jbCadastrarClienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarClienteMouseExited
@@ -394,14 +410,25 @@ public class Principal extends javax.swing.JFrame {
 
     private void jbConsultaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultaProdutoActionPerformed
         ConsultaProduto consultProd = null;
-        try {
-            consultProd = new ConsultaProduto(this);
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        consultProd = new ConsultaProduto(this);
         jDesktopPane1.add(consultProd);
         consultProd.setVisible(true);
     }//GEN-LAST:event_jbConsultaProdutoActionPerformed
+
+    private void jbCadastrarVendaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarVendaMouseEntered
+        jbCadastrarVenda.setFont(new Font("Tahoma", Font.BOLD, 12));
+    }//GEN-LAST:event_jbCadastrarVendaMouseEntered
+
+    private void jbCadastrarVendaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCadastrarVendaMouseExited
+        jbCadastrarVenda.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    }//GEN-LAST:event_jbCadastrarVendaMouseExited
+
+    private void jbCadastrarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarVendaActionPerformed
+        TelaVendas tv = null;
+        tv = new TelaVendas(this);
+        jDesktopPane1.add(tv);
+        tv.setVisible(true);
+    }//GEN-LAST:event_jbCadastrarVendaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -431,17 +458,13 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new Principal().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new Principal().setVisible(true);
             }
         });
     }
-    
-    public void abrirTelaVendas() throws SQLException{
-        TelaVendas tv = new TelaVendas(this);
+
+    public void abrirTelaVendas() {
+        tv = new TelaVendas(this);
         jDesktopPane1.add(tv);
         tv.setVisible(true);
     }
@@ -458,6 +481,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbCadastrarCliente;
     private javax.swing.JButton jbCadastrarProduto;
+    private javax.swing.JButton jbCadastrarVenda;
     private javax.swing.JButton jbConsultaCliente;
     private javax.swing.JButton jbConsultaProduto;
     private javax.swing.JButton jbConsultaVenda;

@@ -11,19 +11,15 @@ import DAO.VendasDAO;
 import Model.Cliente;
 import Model.Produto;
 import Model.TipoPagamento;
-import Model.TipoProduto;
 import Model.Venda;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import java.util.List;
-import java.util.Vector;
+
 /**
  *
  * @author Matheus
@@ -40,15 +36,14 @@ public class Carrinho extends javax.swing.JInternalFrame {
     private ProdutoDAO produto = new ProdutoDAO();
     private ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
     private Cliente cliente;
-    
 
-    public Carrinho(Principal principal, ArrayList<Produto> listaProdutos) throws SQLException {
-        super("Editar Cliente", true, true, false, true);
+    public Carrinho(Principal principal, ArrayList<Produto> listaProdutos) {
+        super("Carrinho", true, true, false, true);
         this.principal = principal;
         this.listaProdutos = listaProdutos;
-        initComponents(); 
+        initComponents();
         montaTable(listaProdutos);
-        preencheComboBox(); 
+        preencheComboBox();
         somaValores();
         adicionaValor();
     }
@@ -461,19 +456,15 @@ public class Carrinho extends javax.swing.JInternalFrame {
         int clienteId = cliente.getCodigo();
         Venda v = new Venda();
         VendasDAO venda = new VendasDAO();
-        String tipoPag =  (String) jcbPagamento.getSelectedItem();
+        String tipoPag = (String) jcbPagamento.getSelectedItem();
         TipoPagamento tp = Enum.valueOf(TipoPagamento.class, tipoPag);
         v.setFormaPagamento(tp);
         v.setSituacao("Aprovado");
         v.setValor(somaValores());
-        try {
-            int codVenda = venda.adicionaVenda(v, clienteId);
-            venda.adicionaItemVenda(listaProdutos, codVenda);
-            JOptionPane.showMessageDialog(null, "Venda realizada com sucesso");
-            this.dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(Carrinho.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        int codVenda = venda.adicionaVenda(v, clienteId);
+        venda.adicionaItemVenda(listaProdutos, codVenda);
+        JOptionPane.showMessageDialog(null, "Venda realizada com sucesso");
+        this.dispose();
     }//GEN-LAST:event_jbFinalizarCompraActionPerformed
 
     private void jcbPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPagamentoActionPerformed
@@ -483,19 +474,13 @@ public class Carrinho extends javax.swing.JInternalFrame {
     private void jbPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisaClienteActionPerformed
         ClienteDAO c = new ClienteDAO();
         String CPF = jftCpf.getText().replaceAll("[.,-]", "");
-        try {
-            cliente = c.pesquisaUnicoUsuario(CPF);
-            jftCpf.setText(cliente.getCpf());
-            jtUsuario.setText(cliente.getUsuario());
-            jtNome.setText(cliente.getNome());
-            jtEmail.setText(cliente.getEmail());
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "Usuário não encontrado");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "CPF Inválido");
-        }
+        cliente = c.pesquisaUnicoUsuario(CPF);
+        jftCpf.setText(cliente.getCpf());
+        jtUsuario.setText(cliente.getUsuario());
+        jtNome.setText(cliente.getNome());
+        jtEmail.setText(cliente.getEmail());
     }//GEN-LAST:event_jbPesquisaClienteActionPerformed
-    
+
     public void montaTable(ArrayList<Produto> listP) {
         modelo = (DefaultTableModel) jtCarrinho.getModel();
         String[] linha = {null, null, null, null, null, null};
@@ -525,32 +510,32 @@ public class Carrinho extends javax.swing.JInternalFrame {
         }
     }
 
-    public void atualizaTabela() throws SQLException {
+    public void atualizaTabela() {
         limpaTabela();
         listaProdutos = produto.todosProdutos();
         montaTable(listaProdutos);
     }
 
-    public void preencheComboBox() throws SQLException{
+    public void preencheComboBox() {
         TipoPagamento tp = null;
-        ArrayList<String>tipoPag = tp.stringTipoPag();
+        ArrayList<String> tipoPag = tp.stringTipoPag();
         jcbPagamento.setModel(new DefaultComboBoxModel(tipoPag.toArray()));
     }
-    
-    public double somaValores(){
+
+    public double somaValores() {
         double total = 0;
-        for(Produto p: listaProdutos){
-            total += (p.getPreco()*p.getQuantidade());
+        for (Produto p : listaProdutos) {
+            total += (p.getPreco() * p.getQuantidade());
         }
         return total;
     }
-    
-    public void adicionaValor(){
+
+    public void adicionaValor() {
         double total = somaValores();
         jlTotalVenda.setText(String.valueOf(total).replaceAll("[.]", ","));
         jlTotal.setText(String.valueOf(total).replaceAll("[.]", ","));
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

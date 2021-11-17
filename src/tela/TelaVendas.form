@@ -136,16 +136,13 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jbEditar" max="32767" attributes="0"/>
-                          <Component id="jbEditar2" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jbAdicionaProd" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jCheckMenorPreco" min="-2" pref="113" max="-2" attributes="0"/>
                               <Component id="jCheckMaiorPreco" min="-2" pref="113" max="-2" attributes="0"/>
-                              <Component id="jbEditar1" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
+                              <Component id="jbCarrinho" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -157,33 +154,27 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbPesquisar" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="jtNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbEditar2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jbEditar" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jcbTipoProd" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Component id="jbPesquisar" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbAdicionaProd" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                  <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jcbTipoProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jCheckMaiorPreco" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jCheckMenorPreco" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jbEditar1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbCarrinho" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane1" min="-2" pref="378" max="-2" attributes="0"/>
                   </Group>
@@ -282,15 +273,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbPesquisarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jbEditar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Editar produto"/>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbEditarActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckMenorPreco">
           <Properties>
             <Property name="text" type="java.lang.String" value="Menor pre&#xe7;o"/>
@@ -328,7 +310,7 @@
             <Property name="text" type="java.lang.String" value="Tipo de produto"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jbEditar1">
+        <Component class="javax.swing.JButton" name="jbCarrinho">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/carrinho-de-compras-de-design-xadrez (1).png"/>
@@ -342,15 +324,15 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbEditar1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCarrinhoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jbEditar2">
+        <Component class="javax.swing.JButton" name="jbAdicionaProd">
           <Properties>
             <Property name="text" type="java.lang.String" value="Adicionar ao carrinho"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbEditar2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAdicionaProdActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
