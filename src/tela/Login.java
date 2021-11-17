@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Matheus
@@ -20,7 +19,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() throws IOException {
         initComponents();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -235,23 +234,19 @@ public class Login extends javax.swing.JFrame {
     private void tfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfUsuarioActionPerformed
-   
+
     private void jbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLoginActionPerformed
         String usuario = tfUsuario.getText();
         String senha = psSenha.getText();
         ClienteDAO cliente = new ClienteDAO();
-        try {
-            if(cliente.validaLogin(usuario, senha)){
-                Principal p = new Principal();
-                p.setVisible(true);
-                this.dispose();
-            }else{
-                JOptionPane.showMessageDialog(null,"Usuário ou Senha Inválidos!");
-                tfUsuario.setText("");
-                psSenha.setText("");
-            }
-        }catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        if (cliente.validaLogin(usuario, senha)) {
+            Principal p = new Principal();
+            p.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuário ou Senha Inválidos!");
+            tfUsuario.setText("");
+            psSenha.setText("");
         }
     }//GEN-LAST:event_jbLoginActionPerformed
 
@@ -265,22 +260,22 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jbCriaContaActionPerformed
 
     private void jbLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLoginMouseEntered
-        jbLogin.setBackground(new Color(235,235,235));
-        jbLogin.setForeground(new Color(58,65,84));
+        jbLogin.setBackground(new Color(235, 235, 235));
+        jbLogin.setForeground(new Color(58, 65, 84));
     }//GEN-LAST:event_jbLoginMouseEntered
 
     private void jbLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLoginMouseExited
-        jbLogin.setBackground(new Color(0,102,51));
+        jbLogin.setBackground(new Color(0, 102, 51));
         jbLogin.setForeground(Color.WHITE);
     }//GEN-LAST:event_jbLoginMouseExited
 
     private void jbCriaContaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCriaContaMouseEntered
-        jbCriaConta.setBackground(new Color(235,235,235));
-        jbCriaConta.setForeground(new Color(58,65,84));
+        jbCriaConta.setBackground(new Color(235, 235, 235));
+        jbCriaConta.setForeground(new Color(58, 65, 84));
     }//GEN-LAST:event_jbCriaContaMouseEntered
 
     private void jbCriaContaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbCriaContaMouseExited
-        jbCriaConta.setBackground(new Color(51,51,51));
+        jbCriaConta.setBackground(new Color(51, 51, 51));
         jbCriaConta.setForeground(Color.WHITE);
     }//GEN-LAST:event_jbCriaContaMouseExited
 
@@ -301,8 +296,6 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jbFechaTelaMouseExited
 
-   
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;

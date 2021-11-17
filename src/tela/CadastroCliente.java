@@ -8,9 +8,6 @@ package tela;
 import DAO.ClienteDAO;
 import Model.Cliente;
 import java.awt.Color;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -349,36 +346,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbFecharActionPerformed
 
     private void jbCriarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCriarClienteActionPerformed
-        Cliente c = new Cliente();
-        c.setNome(jtNome.getText());
-        c.setUsuario(jtUsuario.getText());
-        c.setCpf(jftCpf.getText().replaceAll("[.,-]", ""));
-        c.setEmail(jtEmail.getText());
-        c.setSenha(jpSenha.getText());
-        ClienteDAO cliente = new ClienteDAO();
-        if (usuarioValido && verificaSenha && verificaEmail && !c.getNome().equals("") && !c.getEmail().equals("")) {
-            cliente.adicionaUsuario(c);
-            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso");
-            jtNome.setText("");
-            jtUsuario.setText("");
-            jftCpf.setText("");
-            jtEmail.setText("");
-            jpSenha.setText("");
-            jpConfirmaSenha.setText("");
-            jlAvisoEmail.setText("");
-            jlComparaSenha.setText("");
-            jlAvisoUsuario.setText("");
-        } else if (!usuarioValido) {
-            JOptionPane.showMessageDialog(null, "O usuário passado já existe");
-        } else if (!usuarioValido && c.getUsuario().equals("")) {
-            JOptionPane.showMessageDialog(null, "O usuário não foi preenchido");
-        } else if (!verificaSenha) {
-            JOptionPane.showMessageDialog(null, "As senhas não correspondem");
-        } else if (c.getNome().equals("") || c.getUsuario().equals("") || c.getEmail().equals("")) {
-            JOptionPane.showMessageDialog(null, "Um ou mais campos estão vazios");
-        } else if (!verificaEmail) {
-            JOptionPane.showMessageDialog(null, "O email informado não é válido");
-        }
+        cadastraCliente();
     }//GEN-LAST:event_jbCriarClienteActionPerformed
 
     private void jtNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNomeFocusLost
@@ -415,8 +383,40 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jftCpfFocusLost
-
-
+    
+    public void cadastraCliente(){
+        Cliente c = new Cliente();
+        c.setNome(jtNome.getText());
+        c.setUsuario(jtUsuario.getText());
+        c.setCpf(jftCpf.getText().replaceAll("[.,-]", ""));
+        c.setEmail(jtEmail.getText());
+        c.setSenha(jpSenha.getText());
+        ClienteDAO cliente = new ClienteDAO();
+        if (usuarioValido && verificaSenha && verificaEmail && !c.getNome().equals("") && !c.getEmail().equals("")) {
+            cliente.adicionaUsuario(c);
+            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso");
+            jtNome.setText("");
+            jtUsuario.setText("");
+            jftCpf.setText("");
+            jtEmail.setText("");
+            jpSenha.setText("");
+            jpConfirmaSenha.setText("");
+            jlAvisoEmail.setText("");
+            jlComparaSenha.setText("");
+            jlAvisoUsuario.setText("");
+        } else if (!usuarioValido) {
+            JOptionPane.showMessageDialog(null, "O usuário passado já existe");
+        } else if (!usuarioValido && c.getUsuario().equals("")) {
+            JOptionPane.showMessageDialog(null, "O usuário não foi preenchido");
+        } else if (!verificaSenha) {
+            JOptionPane.showMessageDialog(null, "As senhas não correspondem");
+        } else if (c.getNome().equals("") || c.getUsuario().equals("") || c.getEmail().equals("")) {
+            JOptionPane.showMessageDialog(null, "Um ou mais campos estão vazios");
+        } else if (!verificaEmail) {
+            JOptionPane.showMessageDialog(null, "O email informado não é válido");
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
