@@ -116,7 +116,7 @@ public class ClienteDAO {
         conexao.fecharConexao();
         return listaCliente;
     }
-    
+
     public boolean cpfExistente(String cpf) throws SQLException {
         boolean disponivel = false;
         Conexao conexao = new Conexao();
@@ -170,14 +170,14 @@ public class ClienteDAO {
             pst.setString(2, "%" + c.getCpf() + "%");
             pst.setString(3, "%" + c.getEmail() + "%");
             Integer codigo = c.getCodigo();
-            if(codigo != 0)
+            if (codigo != 0) {
                 pst.setInt(4, c.getCodigo());
-            else{
+            } else {
                 pst.setString(4, "%%");
                 System.out.println("Entrei no else");
             }
             rs = pst.executeQuery();
-            if (rs!=null) {
+            if (rs != null) {
                 while (rs.next()) {
                     Cliente cliente = new Cliente();
                     cliente.setCodigo(rs.getInt("CLIENTEID"));
@@ -185,7 +185,6 @@ public class ClienteDAO {
                     cliente.setUsuario(rs.getString("USUARIO"));
                     cliente.setCpf(rs.getString("CPF"));
                     cliente.setEmail(rs.getString("EMAIL"));
-                    System.out.println("Adicionei");
                     listaCliente.add(cliente);
                 }
             } else {
@@ -215,5 +214,37 @@ public class ClienteDAO {
             JOptionPane.showMessageDialog(null, "Erro ao deletar cliente" + e);
         }
         conexao.fecharConexao();
+    }
+
+    public Cliente pesquisaUnicoUsuario(String CPF) throws SQLException {
+        Cliente cliente = null;
+        Conexao conexao = new Conexao();
+        con = conexao.getConexao();
+        ResultSet rs = null;
+        String SQL = "SELECT CLIENTEID, CPF, NOME, USUARIO, EMAIL from tb_cliente where CPF = ?";
+        try {
+            pst = con.prepareStatement(SQL);
+            pst.setString(1, CPF);
+            rs = pst.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    cliente = new Cliente();
+                    cliente.setCodigo(rs.getInt("CLIENTEID"));
+                    cliente.setCpf(rs.getString("CPF"));
+                    cliente.setNome(rs.getString("NOME"));
+                    cliente.setUsuario(rs.getString("USUARIO"));
+                    cliente.setEmail(rs.getString("EMAIL"));
+                }
+            } else {
+                rs.close();
+                conexao.fecharConexao();
+                return cliente;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao resgatar a lista de clientes. Erro: " + e);
+        }
+        rs.close();
+        conexao.fecharConexao();
+        return cliente;
     }
 }

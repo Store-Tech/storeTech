@@ -40,12 +40,13 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     private ArrayList<Produto> carrinho = new ArrayList<Produto>();
 
     public TelaVendas(Principal principal) throws SQLException {
-        super("Consultar Produto", true, true, false, true);
+        super("Venda de Produtos", true, true, false, true);
         this.principal = principal;
         initComponents();
         listaProduto = produto.todosProdutos();
         montaTable(listaProduto);
         preencheComboBox(); 
+        this.setFocusable(true);
     }
 
     /**
@@ -87,7 +88,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Consulta Produto");
+        jLabel1.setText("Venda de Produtos");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -139,7 +140,8 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nome");
 
-        jbPesquisar.setText("Pesquisar");
+        jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lupa.png"))); // NOI18N
+        jbPesquisar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbPesquisarActionPerformed(evt);
@@ -175,7 +177,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
         jbEditar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrinho-de-compras-de-design-xadrez (1).png"))); // NOI18N
         jbEditar1.setBorder(null);
         jbEditar1.setBorderPainted(false);
-        jbEditar1.setContentAreaFilled(false);
+        jbEditar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbEditar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEditar1ActionPerformed(evt);
@@ -200,12 +202,13 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -221,7 +224,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                             .addComponent(jCheckMenorPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckMaiorPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,7 +232,7 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jbPesquisar)
+                    .addComponent(jbPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbEditar2))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,17 +406,16 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     }
     
     public void preencheComboBox() throws SQLException{
-        ProdutoDAO produto = new ProdutoDAO();
-        String[] tiposProd = produto.retornaTiposProduto();
-        List<String> tipoProd = new ArrayList<String>(Arrays.asList(tiposProd));
-        tipoProd.add(0, "");
-        jcbTipoProd.setModel(new DefaultComboBoxModel(tipoProd.toArray()));
-        
+        TipoProduto tp = null;
+        ArrayList<String>tipProd = tp.stringTipoProd();
+        tipProd.add(0, "");
+        jcbTipoProd.setModel(new DefaultComboBoxModel(tipProd.toArray()));
     }
     
     public Produto adicionarProdutoCarrinho(){
         int linha = this.jtProdutos.getSelectedRow();
         Produto p = new Produto();
+        p.setCodProd(Integer.parseInt(jtProdutos.getValueAt(linha, 0).toString()));
         p.setNome(jtProdutos.getValueAt(linha, 1).toString());
         p.setPreco(Double.parseDouble(jtProdutos.getValueAt(linha, 2).toString()));
         p.setQuantidade(1);

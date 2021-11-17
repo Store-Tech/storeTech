@@ -312,12 +312,10 @@ public class ConsultaProduto extends javax.swing.JInternalFrame {
     }
     
     public void preencheComboBox() throws SQLException{
-        ProdutoDAO produto = new ProdutoDAO();
-        String[] tiposProd = produto.retornaTiposProduto();
-        List<String> tipoProd = new ArrayList<String>(Arrays.asList(tiposProd));
-        tipoProd.add(0, "");
-        jcbTipoProd.setModel(new DefaultComboBoxModel(tipoProd.toArray()));
-        
+        TipoProduto tp = null;
+        ArrayList<String>tipProd = tp.stringTipoProd();
+        tipProd.add(0, "");
+        jcbTipoProd.setModel(new DefaultComboBoxModel(tipProd.toArray()));
     }
     
     public Produto adicionarProdutoCarrinho(){

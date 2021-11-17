@@ -10,6 +10,7 @@ import Model.Produto;
 import Model.TipoProduto;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -510,10 +511,9 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtCodProd1ActionPerformed
   
     public void preencheComboBox() throws SQLException{
-        ProdutoDAO produto = new ProdutoDAO();
-        String[] tiposProd = produto.retornaTiposProduto();
-        jcbTiposProd.setModel(new DefaultComboBoxModel(tiposProd));
-        
+        TipoProduto tp = null;
+        ArrayList<String>tipProd = tp.stringTipoProd();
+        jcbTiposProd.setModel(new DefaultComboBoxModel(tipProd.toArray()));
     }
     
     
