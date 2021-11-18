@@ -346,7 +346,24 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbFecharActionPerformed
 
     private void jbCriarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCriarClienteActionPerformed
-        cadastraCliente();
+        Cliente c = new Cliente();
+        c.setNome(jtNome.getText());
+        c.setUsuario(jtUsuario.getText());
+        c.setCpf(jftCpf.getText().replaceAll("[.,-]", ""));
+        c.setEmail(jtEmail.getText());
+        c.setSenha(jpSenha.getText());
+        if(usuarioValido && verificaSenha && verificaEmail && !c.getNome().equals("") && !c.getEmail().equals("")){
+        cadastraCliente(c);
+        }
+        jtNome.setText("");
+        jtUsuario.setText("");
+        jftCpf.setText("");
+        jtEmail.setText("");
+        jpSenha.setText("");
+        jpConfirmaSenha.setText("");
+        jlAvisoEmail.setText("");
+        jlComparaSenha.setText("");
+        jlAvisoUsuario.setText("");
     }//GEN-LAST:event_jbCriarClienteActionPerformed
 
     private void jtNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNomeFocusLost
@@ -384,37 +401,26 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jftCpfFocusLost
     
-    public void cadastraCliente(){
-        Cliente c = new Cliente();
-        c.setNome(jtNome.getText());
-        c.setUsuario(jtUsuario.getText());
-        c.setCpf(jftCpf.getText().replaceAll("[.,-]", ""));
-        c.setEmail(jtEmail.getText());
-        c.setSenha(jpSenha.getText());
+    public String cadastraCliente(Cliente c){
         ClienteDAO cliente = new ClienteDAO();
-        if (usuarioValido && verificaSenha && verificaEmail && !c.getNome().equals("") && !c.getEmail().equals("")) {
+        String msg = "";
+        if (!c.getNome().equals("") && !c.getEmail().equals("")) {
+            System.out.println("Entrei");
             cliente.adicionaUsuario(c);
-            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso");
-            jtNome.setText("");
-            jtUsuario.setText("");
-            jftCpf.setText("");
-            jtEmail.setText("");
-            jpSenha.setText("");
-            jpConfirmaSenha.setText("");
-            jlAvisoEmail.setText("");
-            jlComparaSenha.setText("");
-            jlAvisoUsuario.setText("");
-        } else if (!usuarioValido) {
-            JOptionPane.showMessageDialog(null, "O usuário passado já existe");
-        } else if (!usuarioValido && c.getUsuario().equals("")) {
-            JOptionPane.showMessageDialog(null, "O usuário não foi preenchido");
-        } else if (!verificaSenha) {
-            JOptionPane.showMessageDialog(null, "As senhas não correspondem");
+            msg = "O cadastro foi realizado com sucesso";
         } else if (c.getNome().equals("") || c.getUsuario().equals("") || c.getEmail().equals("")) {
-            JOptionPane.showMessageDialog(null, "Um ou mais campos estão vazios");
+            msg = "Um ou mais campos estão vazios";
         } else if (!verificaEmail) {
-            JOptionPane.showMessageDialog(null, "O email informado não é válido");
+            msg = "O email informado não é válido";
+        } else if (!usuarioValido) {
+            msg = "O usuário passado já existe";
+        } else if (!usuarioValido && c.getUsuario().equals("")) {
+            msg = "O usuário não foi preenchido";
+        } else if (!verificaSenha) {
+            msg = "As senhas não correspondem";
         }
+        JOptionPane.showMessageDialog(null, msg);
+        return msg;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

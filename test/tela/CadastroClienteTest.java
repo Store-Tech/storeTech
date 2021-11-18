@@ -11,12 +11,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import DAO.ClienteDAO;
+import Model.Cliente;
 
 /**
  *
- * @author Matheus
+ * @author Israel
  */
 public class CadastroClienteTest {
+
+    static Cliente cliente;
     
     public CadastroClienteTest() {
     }
@@ -27,6 +31,7 @@ public class CadastroClienteTest {
     
     @AfterClass
     public static void tearDownClass() {
+      
     }
     
     @Before
@@ -35,6 +40,8 @@ public class CadastroClienteTest {
     
     @After
     public void tearDown() {
+         ClienteDAO clienteDao = new ClienteDAO();
+         clienteDao.deleteClienteTeste(cliente);
     }
 
     /**
@@ -42,11 +49,15 @@ public class CadastroClienteTest {
      */
     @Test
     public void testCadastraCliente() {
-        System.out.println("cadastraCliente");
-        CadastroCliente instance = new CadastroCliente();
-        instance.cadastraCliente();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        cliente = new Cliente();
+        CadastroCliente cc = new CadastroCliente(); 
+        cliente.setNome("");
+        cliente.setUsuario("israel.gomes");
+        cliente.setCpf("12345678915");
+        cliente.setEmail("israelgomes13@gmail.com");
+        cliente.setSenha("batatinha123");
+        System.out.println(cliente);
+        String msg = cc.cadastraCliente(cliente);
+        assertEquals("O cadastro foi realizado com sucesso", msg);
     }
-    
 }

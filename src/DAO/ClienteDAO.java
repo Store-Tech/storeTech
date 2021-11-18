@@ -216,6 +216,22 @@ public class ClienteDAO {
         conexao.fecharConexao();
     }
 
+    public void deleteClienteTeste(Cliente c){
+        Conexao conexao = new Conexao();
+        Connection con = conexao.getConexao();
+        String delete = "DELETE FROM storetech.TB_CLIENTE WHERE USUARIO = ?";
+        try {
+            pst = con.prepareStatement(delete);
+            pst.setString(1, c.getUsuario());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Cliente deletado com sucesso");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao deletar cliente" + e);
+        }
+        conexao.fecharConexao();
+    }
+
+
     public Cliente pesquisaUnicoUsuario(String CPF){
         Cliente cliente = null;
         Conexao conexao = new Conexao();
