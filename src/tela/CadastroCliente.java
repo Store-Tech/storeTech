@@ -423,7 +423,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         } else if (c.getEmail().equals("")) {
             msg = "O email não foi informado";
         } else if (c.getSenha().equals("")) {
-            msg = "Um ou mais campos estão vazios";
+            msg = "A senha não foi informada";
         }
         JOptionPane.showMessageDialog(null, msg);
         return msg;
