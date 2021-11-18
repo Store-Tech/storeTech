@@ -47,7 +47,7 @@ public class ClienteDAO {
         Conexao conexao = new Conexao();
         con = conexao.getConexao();
         ResultSet rs = null;
-        String SQL = "SELECT usuario, password FROM tb_cliente WHERE USUARIO = ? AND SENHA = ?";
+        String SQL = "SELECT usuario, senha FROM tb_cliente WHERE USUARIO = ? AND SENHA = ?";
         try {
             pst = con.prepareStatement(SQL);
             pst.setString(1, usuario);
@@ -242,22 +242,20 @@ public class ClienteDAO {
             pst = con.prepareStatement(SQL);
             pst.setString(1, CPF);
             rs = pst.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
+            if (rs.next()) {
                     cliente = new Cliente();
                     cliente.setCodigo(rs.getInt("CLIENTEID"));
                     cliente.setCpf(rs.getString("CPF"));
                     cliente.setNome(rs.getString("NOME"));
                     cliente.setUsuario(rs.getString("USUARIO"));
                     cliente.setEmail(rs.getString("EMAIL"));
-                }
             } else {
                 rs.close();
                 conexao.fecharConexao();
                 return cliente;
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao resgatar a lista de clientes. Erro: " + e);
+            JOptionPane.showMessageDialog(null, "Erro ao resgatar cliente. Erro: " + e);
         }
         conexao.fecharConexao();
         return cliente;

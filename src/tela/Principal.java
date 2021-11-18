@@ -40,7 +40,7 @@ public class Principal extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        jbLogoff = new javax.swing.JButton();
         jbCadastrarVenda = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jbFechar = new javax.swing.JButton();
@@ -180,11 +180,25 @@ public class Principal extends javax.swing.JFrame {
         jButton8.setBorderPainted(false);
         jButton8.setContentAreaFilled(false);
 
-        jButton9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jButton9.setText("Logoff");
-        jButton9.setBorderPainted(false);
-        jButton9.setContentAreaFilled(false);
+        jbLogoff.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jbLogoff.setForeground(new java.awt.Color(255, 255, 255));
+        jbLogoff.setText("Logoff");
+        jbLogoff.setBorderPainted(false);
+        jbLogoff.setContentAreaFilled(false);
+        jbLogoff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbLogoff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jbLogoffMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jbLogoffMouseExited(evt);
+            }
+        });
+        jbLogoff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLogoffActionPerformed(evt);
+            }
+        });
 
         jbCadastrarVenda.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jbCadastrarVenda.setForeground(new java.awt.Color(255, 255, 255));
@@ -239,7 +253,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbLogoff, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton8))))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
@@ -269,7 +283,7 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
                 .addComponent(jButton8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9)
+                .addComponent(jbLogoff)
                 .addGap(31, 31, 31))
         );
 
@@ -430,38 +444,20 @@ public class Principal extends javax.swing.JFrame {
         tv.setVisible(true);
     }//GEN-LAST:event_jbCadastrarVendaActionPerformed
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void jbLogoffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLogoffActionPerformed
+        Login login = new Login();
+        this.dispose();
+        login.setVisible(true);
+    }//GEN-LAST:event_jbLogoffActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Principal().setVisible(true);
-            }
-        });
-    }
+    private void jbLogoffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLogoffMouseEntered
+
+    }//GEN-LAST:event_jbLogoffMouseEntered
+
+    private void jbLogoffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLogoffMouseExited
+
+    }//GEN-LAST:event_jbLogoffMouseExited
+
 
     public void abrirTelaVendas() {
         tv = new TelaVendas(this);
@@ -472,7 +468,6 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -486,5 +481,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jbConsultaProduto;
     private javax.swing.JButton jbConsultaVenda;
     private javax.swing.JButton jbFechar;
+    private javax.swing.JButton jbLogoff;
     // End of variables declaration//GEN-END:variables
 }
