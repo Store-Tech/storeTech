@@ -352,18 +352,27 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         c.setCpf(jftCpf.getText().replaceAll("[.,-]", ""));
         c.setEmail(jtEmail.getText());
         c.setSenha(jpSenha.getText());
-        if(usuarioValido && verificaSenha && verificaEmail && !c.getNome().equals("") && !c.getEmail().equals("")){
-        cadastraCliente(c);
+        String msg;
+        if (usuarioValido && verificaSenha && verificaEmail) {
+            cadastraCliente(c);
+            jtNome.setText("");
+            jtUsuario.setText("");
+            jftCpf.setText("");
+            jtEmail.setText("");
+            jpSenha.setText("");
+            jpConfirmaSenha.setText("");
+            jlAvisoEmail.setText("");
+            jlComparaSenha.setText("");
+            jlAvisoUsuario.setText("");
+        } else if (!verificaEmail) {
+            msg = "O email informado não é válido";
+        } else if (!usuarioValido) {
+            msg = "O usuário passado já existe";
+        } else if (!usuarioValido && c.getUsuario().equals("")) {
+            msg = "O usuário não foi preenchido";
+        } else if (!verificaSenha) {
+            msg = "As senhas não correspondem";
         }
-        jtNome.setText("");
-        jtUsuario.setText("");
-        jftCpf.setText("");
-        jtEmail.setText("");
-        jpSenha.setText("");
-        jpConfirmaSenha.setText("");
-        jlAvisoEmail.setText("");
-        jlComparaSenha.setText("");
-        jlAvisoUsuario.setText("");
     }//GEN-LAST:event_jbCriarClienteActionPerformed
 
     private void jtNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNomeFocusLost
@@ -400,29 +409,26 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jftCpfFocusLost
-    
-    public String cadastraCliente(Cliente c){
+
+    public String cadastraCliente(Cliente c) {
         ClienteDAO cliente = new ClienteDAO();
         String msg = "";
-        if (!c.getNome().equals("") && !c.getEmail().equals("")) {
-            System.out.println("Entrei");
+        if (!c.getNome().equals("") && !c.getEmail().equals("") && !c.getSenha().equals("") && !c.getUsuario().equals("")) {
             cliente.adicionaUsuario(c);
             msg = "O cadastro foi realizado com sucesso";
-        } else if (c.getNome().equals("") || c.getUsuario().equals("") || c.getEmail().equals("")) {
+        } else if (c.getNome().equals("")) {
+            msg = "O nome não foi informado";
+        } else if (c.getUsuario().equals("")) {
+            msg = "O usuário não foi informado";
+        } else if (c.getEmail().equals("")) {
+            msg = "O email não foi informado";
+        } else if (c.getSenha().equals("")) {
             msg = "Um ou mais campos estão vazios";
-        } else if (!verificaEmail) {
-            msg = "O email informado não é válido";
-        } else if (!usuarioValido) {
-            msg = "O usuário passado já existe";
-        } else if (!usuarioValido && c.getUsuario().equals("")) {
-            msg = "O usuário não foi preenchido";
-        } else if (!verificaSenha) {
-            msg = "As senhas não correspondem";
         }
         JOptionPane.showMessageDialog(null, msg);
         return msg;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
