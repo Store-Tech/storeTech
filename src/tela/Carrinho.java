@@ -475,10 +475,18 @@ public class Carrinho extends javax.swing.JInternalFrame {
         ClienteDAO c = new ClienteDAO();
         String CPF = jftCpf.getText().replaceAll("[.,-]", "");
         cliente = c.pesquisaUnicoUsuario(CPF);
-        jftCpf.setText(cliente.getCpf());
-        jtUsuario.setText(cliente.getUsuario());
-        jtNome.setText(cliente.getNome());
-        jtEmail.setText(cliente.getEmail());
+        if (cliente == null) {
+            JOptionPane.showMessageDialog(null, "Nenhum cliente encontrado.");
+            jftCpf.setText("");
+            jtUsuario.setText("");
+            jtNome.setText("");
+            jtEmail.setText("");
+        } else {
+            jftCpf.setText(cliente.getCpf());
+            jtUsuario.setText(cliente.getUsuario());
+            jtNome.setText(cliente.getNome());
+            jtEmail.setText(cliente.getEmail());
+        }
     }//GEN-LAST:event_jbPesquisaClienteActionPerformed
 
     public void montaTable(ArrayList<Produto> listP) {

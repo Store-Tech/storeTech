@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -189,21 +190,26 @@ public class TelaVendas extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jcbTipoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbAdicionaProd)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckMenorPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckMaiorPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(9, Short.MAX_VALUE))
+                            .addComponent(jbAdicionaProd)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckMenorPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckMaiorPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(12, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,11 +291,15 @@ public class TelaVendas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCheckMaiorPrecoActionPerformed
 
     private void jbCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCarrinhoActionPerformed
-
+        Carrinho c = null;
+        c = new Carrinho(principal, carrinho);
+        getParent().add(c);
+        c.setVisible(true);
     }//GEN-LAST:event_jbCarrinhoActionPerformed
 
     private void jbAdicionaProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdicionaProdActionPerformed
         carrinho.add(adicionarProdutoCarrinho());
+        JOptionPane.showMessageDialog(null, "Produto adicionado ao carrinho");
     }//GEN-LAST:event_jbAdicionaProdActionPerformed
 
     public void montaTable(ArrayList<Produto> listP) {
